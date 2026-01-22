@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agência de Músicos Porto | Booking de Artistas para Eventos</title>
-    <meta name="description" content="Conectamos músicos talentosos com eventos em Porto. Casamentos, corporativos, restaurantes e festivais.">
+    <title>MúsicosBooKing | Plataforma de Booking de Músicos em Porto</title>
+    <meta name="description" content="Encontre músicos profissionais para seu evento. Casamentos, eventos corporativos, restaurantes, festas.">
     
     <style>
         * {
@@ -14,20 +14,22 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: #1a1a1a;
+            background: #fafafa;
+            scroll-behavior: smooth;
         }
 
-        /* ===== HEADER & NAV ===== */
+        /* ===== HEADER ===== */
         header {
-            background: linear-gradient(135deg, #1a3a52 0%, #2d5a7b 100%);
-            color: white;
-            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 1rem 2rem;
         }
 
         .header-container {
@@ -40,90 +42,540 @@
 
         .logo {
             font-size: 1.8rem;
-            font-weight: bold;
+            font-weight: 800;
+            background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .logo span {
-            color: #f39c12;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-            align-items: center;
-        }
-
         nav a {
-            color: white;
+            color: #666;
             text-decoration: none;
-            font-size: 0.95rem;
+            font-weight: 500;
+            margin-left: 2rem;
             transition: color 0.3s ease;
+            font-size: 0.95rem;
         }
 
         nav a:hover {
-            color: #f39c12;
+            color: #7c3aed;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: #0a0a0a;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #666;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1.2rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            min-width: 200px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(124, 58, 237, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #7c3aed;
+            border: 2px solid #7c3aed;
+        }
+
+        .btn-secondary:hover {
+            background: #f3f0ff;
+        }
+
+        /* ===== CARDS SECTION ===== */
+        .cards-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: #0a0a0a;
+        }
+
+        .card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .card .btn {
+            width: 100%;
+            min-width: unset;
+        }
+
+        /* ===== HOW IT WORKS ===== */
+        .how-it-works {
+            background: linear-gradient(135deg, #f3f0ff 0%, #fce7f3 100%);
+            padding: 5rem 2rem;
+            margin: 4rem 0;
+        }
+
+        .how-it-works h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3.5rem;
+            color: #0a0a0a;
+        }
+
+        .steps-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .step {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
+            color: white;
+            border-radius: 50%;
+            line-height: 50px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .step h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: #0a0a0a;
+        }
+
+        .step p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* ===== FORM SECTION ===== */
+        .form-section {
+            max-width: 700px;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #0a0a0a;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+            font-size: 0.95rem;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit {
+            background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
+            color: white;
+            border: none;
+            padding: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(124, 58, 237, 0.4);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #0f0f0f;
+            color: white;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #ec4899;
+        }
+
+        .footer-section a {
+            color: #999;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ec4899;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
+            nav { display: none; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .btn { width: 100%; }
+            .how-it-works h2 { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
-
     <!-- HEADER -->
     <header>
         <div class="header-container">
-            <div class="logo">
-                🄻 <span>MúsicosBking</span>
-            </div>
+            <div class="logo">🎵 MúsicosBooKing</div>
             <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#musicians">Músicos</a></li>
-                    <li><a href="#services">Serviços</a></li>
-                    <li><a href="#contact">Contato</a></li>
-                </ul>
+                <a href="#empresas">Para Empresas</a>
+                <a href="#musicos">Para Músicos</a>
+                <a href="#form">Solicitar</a>
             </nav>
         </div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>Conectamos Músicos Talentosos com Seus Eventos</h1>
-            <p>Casamentos, corporativos, restaurantes, festivais. Acesso a rede de artistas profissionais em Porto.</p>
-            <div class="hero-buttons">
-                <button class="btn btn-primary" onclick="scrollTo('client-form')">Procuro Músicos</button>
-                <button class="btn btn-secondary" onclick="scrollTo('musician-form')">Sou Músico</button>
+    <!-- HERO -->
+    <section class="hero">
+        <h1>Encontramos os <span>músicos certos</span> para o seu evento</h1>
+        <p>Conectamos empresas e organizadores com artistas profissionais em Porto. Casamentos, eventos corporativos, restaurantes, festas.</p>
+        <div class="hero-buttons">
+            <button class="btn btn-primary" onclick="scrollTo('form-empresa')">Sou Empresa / Organizador</button>
+            <button class="btn btn-secondary" onclick="scrollTo('form-musico')">Sou Músico</button>
+        </div>
+    </section>
+
+    <!-- CARDS -->
+    <section class="cards-section">
+        <div class="card" id="empresas">
+            <div class="card-icon">🎪</div>
+            <h3>Para Empresas & Eventos</h3>
+            <p>Procura músicos para seu evento? Envie uma proposta rápida e receba sugestões de artistas em menos de 2 horas.</p>
+            <button class="btn btn-primary" onclick="scrollTo('form-empresa')">Pedir Músicos</button>
+        </div>
+
+        <div class="card" id="musicos">
+            <div class="card-icon">🎸</div>
+            <h3>Para Músicos & Artistas</h3>
+            <p>Registre-se como artista e comece a receber convites para tocar em eventos. Ganhe enquanto toca.</p>
+            <button class="btn btn-primary" onclick="scrollTo('form-musico')">Cadastro de Artista</button>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">⚡</div>
+            <h3>Rápido & Seguro</h3>
+            <p>Processo ágil, transparente e profissional. Sem taxas ocultas. Confiança garantida em cada booking.</p>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-it-works">
+        <h2>Como Funciona</h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Solicite</h3>
+                <p>Preencha o formulário com detalhes do seu evento: data, local, tipo de música, orçamento.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Escolha</h3>
+                <p>Receba propostas de músicos profissionais. Compare perfis, avaliações e áudio/vídeo.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Confirme</h3>
+                <p>Combine os detalhes finais e confirme o booking. Suporte em cada etapa do caminho.</p>
             </div>
         </div>
     </section>
 
+    <!-- FORM EMPRESA -->
+    <section class="form-section" id="form-empresa">
+        <h2>Solicite Músicos para Seu Evento</h2>
+        <form onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label for="company-name">Nome da Empresa / Organizador *</label>
+                <input type="text" id="company-name" name="company" required>
+            </div>
+            <div class="form-group">
+                <label for="company-email">Email *</label>
+                <input type="email" id="company-email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="company-phone">Telefónico *</label>
+                <input type="tel" id="company-phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="event-type">Tipo de Evento *</label>
+                <select id="event-type" name="event_type" required>
+                    <option value="">-- Selecione --</option>
+                    <option value="casamento">Casamento</option>
+                    <option value="corporativo">Evento Corporativo</option>
+                    <option value="restaurante">Restaurante / Bar</option>
+                    <option value="festaprivada">Festa Privada</option>
+                    <option value="hotel">Hotel</option>
+                    <option value="outro">Outro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="event-date">Data do Evento *</label>
+                <input type="date" id="event-date" name="event_date" required>
+            </div>
+            <div class="form-group">
+                <label for="event-local">Local/Cidade *</label>
+                <input type="text" id="event-local" name="event_local" placeholder="Ex: Porto, Matosinhos" required>
+            </div>
+            <div class="form-group">
+                <label for="music-type">Tipo de Música / Músico Desejado *</label>
+                <input type="text" id="music-type" name="music_type" placeholder="Ex: DJ, Banda ao vivo, Violinista" required>
+            </div>
+            <div class="form-group">
+                <label for="budget">Orçamento Aproximado (EUR) *</label>
+                <input type="text" id="budget" name="budget" placeholder="Ex: 300-500" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Detalhes Adicionais</label>
+                <textarea id="message" name="message" placeholder="Conte-nos mais sobre seu evento..."></textarea>
+            </div>
+            <button type="submit" class="form-submit">Enviar Solicitação</button>
+        </form>
+    </section>
+
+    <!-- FORM MUSICO -->
+    <section class="form-section" id="form-musico">
+        <h2>Cadastre-se Como Músico/Artista</h2>
+        <form onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label for="artist-name">Seu Nome *</label>
+                <input type="text" id="artist-name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="artist-email">Email *</label>
+                <input type="email" id="artist-email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="artist-phone">Telefónico *</label>
+                <input type="tel" id="artist-phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="instrument">Instrumento / Especialidade *</label>
+                <input type="text" id="instrument" name="instrument" placeholder="Ex: Guitarra, Voz, DJ" required>
+            </div>
+            <div class="form-group">
+                <label for="experience">Anos de Experiência *</label>
+                <input type="number" id="experience" name="experience" placeholder="Ex: 5" required>
+            </div>
+            <div class="form-group">
+                <label for="rate">Taxa/Hora (EUR) *</label>
+                <input type="number" id="rate" name="rate" placeholder="Ex: 50" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="bio">Breve Bio / Descrição *</label>
+                <textarea id="bio" name="bio" placeholder="Fale sobre si, seu estilo, experiências..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="availability">Disponibilidade *</label>
+                <select id="availability" name="availability" required>
+                    <option value="">-- Selecione --</option>
+                    <option value="weekends">Fins de Semana</option>
+                    <option value="weekdays">Dias da Semana</option>
+                    <option value="flexible">Flexível</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="portfolio">Link de Portfólio / Vídeo (YouTube, Spotify)</label>
+                <input type="url" id="portfolio" name="portfolio" placeholder="Ex: https://youtube.com/...">
+            </div>
+            <button type="submit" class="form-submit">Cadastrar-me</button>
+        </form>
+    </section>
+
     <!-- FOOTER -->
     <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Somos</h4>
+                <a href="#">Sobre Nos</a>
+                <a href="#">Blog</a>
+                <a href="#">Carreiras</a>
+            </div>
+            <div class="footer-section">
+                <h4>Suporte</h4>
+                <a href="#">FAQ</a>
+                <a href="#">Contacte-nos</a>
+                <a href="#">Status</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="#">Termos & Condicoes</a>
+                <a href="#">Politica de Privacidade</a>
+                <a href="#">Cookies</a>
+            </div>
+            <div class="footer-section">
+                <h4>Redes Sociais</h4>
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">TikTok</a>
+            </div>
+        </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Agência de Músicos Porto. Todos os direitos reservados.</p>
+            <p>&copy; 2026 MusicosBooKing - Porto. Todos os direitos reservados.</p>
         </div>
     </footer>
 
     <script>
         function scrollTo(elementId) {
-            document.getElementById(elementId).scrollIntoView({ behavior: 'smooth' });
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
         }
 
-        function handleClientSubmit(event) {
+        function handleSubmit(event) {
             event.preventDefault();
-            alert('Obrigado! Receberemos sua solicitação em breve. Vamos contactá-lo dentro de 2 horas.');
-            event.target.reset();
-        }
-
-        function handleMusicianSubmit(event) {
-            event.preventDefault();
-            alert('Obrigado! Seu cadastro foi recebido. Revistamos em 24 horas.');
+            alert('Obrigado! Sua solicitacao foi recebida. Entraremos em contato em breve!');
             event.target.reset();
         }
     </script>
-
 </body>
 </html>
