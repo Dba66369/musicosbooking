@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agência de Músicos Porto | Booking de Artistas para Eventos</title>
+    <meta name="description" content="Conectamos músicos talentosos com eventos em Porto. Casamentos, corporativos, restaurantes e festivais.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* ===== HEADER & NAV ===== */
+        header {
+            background: linear-gradient(135deg, #1a3a52 0%, #2d5a7b 100%);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: #f39c12;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #f39c12;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                🄻 <span>MúsicosBking</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#musicians">Músicos</a></li>
+                    <li><a href="#services">Serviços</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Conectamos Músicos Talentosos com Seus Eventos</h1>
+            <p>Casamentos, corporativos, restaurantes, festivais. Acesso a rede de artistas profissionais em Porto.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollTo('client-form')">Procuro Músicos</button>
+                <button class="btn btn-secondary" onclick="scrollTo('musician-form')">Sou Músico</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Agência de Músicos Porto. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        function scrollTo(elementId) {
+            document.getElementById(elementId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function handleClientSubmit(event) {
+            event.preventDefault();
+            alert('Obrigado! Receberemos sua solicitação em breve. Vamos contactá-lo dentro de 2 horas.');
+            event.target.reset();
+        }
+
+        function handleMusicianSubmit(event) {
+            event.preventDefault();
+            alert('Obrigado! Seu cadastro foi recebido. Revistamos em 24 horas.');
+            event.target.reset();
+        }
+    </script>
+
+</body>
+</html>
