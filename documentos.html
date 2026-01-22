@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MúsicosBooKing | Documentos</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 10px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .tabs { display: flex; background: #f5f5f5; border-bottom: 2px solid #667eea; overflow-x: auto; }
+        .tab-button { flex: 1; padding: 15px 20px; border: none; background: #f5f5f5; color: #333; cursor: pointer; font-size: 1em; font-weight: bold; transition: all 0.3s ease; }
+        .tab-button.active { background: white; color: #667eea; border-bottom: 3px solid #667eea; }
+        .tab-content { display: none; padding: 30px; max-height: 600px; overflow-y: auto; }
+        .tab-content.active { display: block; }
+        .tab-content h2 { color: #667eea; margin-bottom: 20px; }
+        .faq-item { background: #f9f9f9; padding: 15px; margin-bottom: 15px; border-left: 4px solid #667eea; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        table th, table td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        table th { background: #667eea; color: white; }
+        .contact-info { background: #f0f0f0; padding: 15px; border-radius: 5px; margin: 20px 0; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>MúsicosBooKing - Documentos Oficiais</h1>
+        </div>
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab(event, 'faq')">FAQ</button>
+            <button class="tab-button" onclick="openTab(event, 'privacidade')">Privacidade</button>
+            <button class="tab-button" onclick="openTab(event, 'termos')">Termos</button>
+            <button class="tab-button" onclick="openTab(event, 'contrato')">Contrato</button>
+        </div>
+        <div id="faq" class="tab-content active">
+            <h2>Perguntas Frequentes</h2>
+            <div class="faq-item"><strong>P: O que é MúsicosBooKing?</strong><p>R: Plataforma profissional que conecta empresas com músicos em Porto. Gerenciamos negociações, contratos e pagamentos.</p></div>
+            <div class="faq-item"><strong>P: Como funciona?</strong><p>R: 1) Empresa preenche formulário 2) Encontramos músico ideal 3) Empresa paga para MúsicosBooKing 4) Pagamos músico 5) Músico trabalha</p></div>
+            <div class="faq-item"><strong>P: Quanto custa?</strong><p>R: Empresas pagam tarifa + 15%. Músicos recebem 85%.</p></div>
+            <div class="faq-item"><strong>P: Como sou pago?</strong><p>R: Transferência bancária até 5 dias após evento.</p></div>
+            <div class="faq-item"><strong>P: Estou protegido?</strong><p>R: Sim. MúsicosBooKing garante seu pagamento mesmo se empresa falhar.</p></div>
+        </div>
+        <div id="privacidade" class="tab-content">
+            <h2>Política de Privacidade</h2>
+            <h3>1. Responsável pelos Dados</h3>
+            <p><strong>MúsicosBooKing</strong> | Porto, Portugal | CEO: Bruno Novaes | Email: contato@musicosbooking.pt</p>
+            <h3>2. Dados Coletados</h3>
+            <p><strong>Músicos:</strong> Nome, género, biografia, disponibilidade, contacto, dados bancários</p>
+            <p><strong>Empresas:</strong> Nome, evento, data, local, contacto, pagamento</p>
+            <h3>3. Finalidade</h3>
+            <p>Conectar partes, gerenciar contratos, processar pagamentos, cumprir obrigações legais.</p>
+            <h3>4. Retenção de Dados</h3>
+            <table>
+                <tr><th>Tipo</th><th>Período</th></tr>
+                <tr><td>Contratos</td><td>6 anos</td></tr>
+                <tr><td>Dados Bancários</td><td>Até término</td></tr>
+                <tr><td>Eventos</td><td>3 anos</td></tr>
+            </table>
+            <h3>5. Seus Direitos</h3>
+            <p>Acessar, corrigir, eliminar, portabilidade dos seus dados.</p>
+            <div class="contact-info"><strong>Questões de Privacidade:</strong> contato@musicosbooking.pt</div>
+        </div>
+        <div id="termos" class="tab-content">
+            <h2>Termos e Condições</h2>
+            <h3>1. Aceitação</h3>
+            <p>Ao usar MúsicosBooKing, aceita estes termos completamente.</p>
+            <h3>2. Modelo de Pagamento</h3>
+            <p><strong>Empresa paga para MúsicosBooKing</strong> | <strong>MúsicosBooKing retém 15%</strong> | <strong>Músico recebe 85%</strong> | <strong>Pagamento:</strong> 5 dias úteis</p>
+            <h3>3. Exemplo</h3>
+            <table>
+                <tr><th>Item</th><th>Valor</th></tr>
+                <tr><td>Tarifa</td><td>€200</td></tr>
+                <tr><td>Empresa Paga</td><td>€200</td></tr>
+                <tr><td>Comissão (15%)</td><td>€30</td></tr>
+                <tr><td>Músico Recebe</td><td>€170</td></tr>
+            </table>
+            <h3>4. Cancelamentos</h3>
+            <table>
+                <tr><th>Dias</th><th>Reembolso</th><th>Músico</th></tr>
+                <tr><td>+14</td><td>100%</td><td>100%</td></tr>
+                <tr><td>7-14</td><td>50%</td><td>100%</td></tr>
+                <tr><td>-7</td><td>0%</td><td>100%</td></tr>
+            </table>
+            <h3>5. Lei Aplicável</h3>
+            <p>Leis de Portugal, tribunais de Porto.</p>
+        </div>
+        <div id="contrato" class="tab-content">
+            <h2>Contrato de Prestação de Serviços Musicais</h2>
+            <h3>PARTES</h3>
+            <p><strong>Parte A - Músico:</strong> [Dados do Músico]</p>
+            <p><strong>Parte B - Empresa:</strong> [Dados da Empresa]</p>
+            <p><strong>Intermediária:</strong> MúsicosBooKing | CEO: Bruno Novaes | Email: contato@musicosbooking.pt</p>
+            <h3>1. Objeto do Contrato</h3>
+            <p>Prestação de serviço musical na data, hora e local especificados no formulário de booking.</p>
+            <h3>2. Valores</h3>
+            <p>Tarifa acordada: €[VALOR] | Empresa paga para MúsicosBooKing | Músico recebe 85% em até 5 dias</p>
+            <h3>3. Obrigações do Músico</h3>
+            <p>✓ Comparecer 30 min antes | ✓ Equipamento em bom estado | ✓ Comportamento profissional | ✓ Notificar com 14 dias</p>
+            <h3>4. Obrigações da Empresa</h3>
+            <p>✓ Pagar MúsicosBooKing | ✓ Local seguro | ✓ Respeito ao artista | ✓ Cumprir termo</p>
+            <h3>5. Cancelamento</h3>
+            <p>+14 dias: 100% reembolso e músico recebe | 7-14 dias: 50% reembolso, músico recebe 100% | -7 dias: sem reembolso, músico recebe 100%</p>
+            <h3>6. Resolução de Disputas</h3>
+            <p>Mediação por MúsicosBooKing → Mediação externa → Arbitragem/Tribunal de Porto</p>
+            <div class="contact-info"><strong>Para Contratos:</strong> contato@musicosbooking.pt</div>
+        </div>
+    </div>
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tabbuttons;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            tabbuttons = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tabbuttons.length; i++) {
+                tabbuttons[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>
