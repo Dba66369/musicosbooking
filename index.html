@@ -577,5 +577,54 @@
             event.target.reset();
         }
     </script>
+
+    <!-- EmailJS Library -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/index.min.js"></script>
+<script>
+  emailjs.init("WsTHhr1WSMPzRqlpO");
+</script>
+
+<!-- EmailJS Form Handlers -->
+<script>
+  // Form Empresa Handler
+  const empresaForm = document.getElementById("empresaForm");
+  if (empresaForm) {
+    empresaForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      emailjs.send("service_k9c6pdj", "template_8jf2sc8", {
+        nome_empresa: document.getElementById("empresa").value,
+        contacto: document.getElementById("contacto").value,
+        email: document.getElementById("email_empresa").value,
+        telefone: document.getElementById("telefone_empresa").value,
+        tipo_evento: document.getElementById("tipo").value,
+        data_evento: document.getElementById("data").value,
+        descricao: document.getElementById("descricao").value
+      }).then(function() {
+        alert("✅ Pedido enviado com sucesso! Entraremos em contacto em breve.");
+        empresaForm.reset();
+      });
+    });
+  }
+  
+  // Form Musico Handler
+  const musicoForm = document.getElementById("musicoForm");
+  if (musicoForm) {
+    musicoForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      emailjs.send("service_k9c6pdj", "template_1759rog", {
+        nome_musico: document.getElementById("nomeMusico").value,
+        genero_musical: document.getElementById("genero").value,
+        biografia: document.getElementById("biografia").value,
+        disponibilidade: document.getElementById("disponibilidade").value,
+        tarifa: document.getElementById("tarifa").value,
+        email: document.getElementById("email_musico").value,
+        telefone: document.getElementById("telefone_musico").value
+      }).then(function() {
+        alert("✅ Proposta enviada com sucesso! Avaliaremos em breve.");
+        musicoForm.reset();
+      });
+    });
+  }
+</script>
 </body>
 </html>
