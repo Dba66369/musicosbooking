@@ -236,6 +236,38 @@
 
 <header>
     <a href="/" class="logo">MúsicosBooKing</a>
+    
+/* NEW STYLES: RAPIDO E SEGURO, GARANTIAS */.guarantee-container { display: flex; gap: 60px; align-items: flex-start; max-width: 1100px; margin: 0 auto; }
+
+.guarantee-container h3 { font-size: 2rem; margin-bottom: 20px; color: var(--gold); }
+
+.guarantee-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
+
+.feature-item { background: #0f0f0f; padding: 30px; border-radius: 15px; border: 1px solid #222; text-align: center; }
+
+.feature-item:hover { border-color: var(--gold); transform: translateY(-5px); }
+
+.feature-icon { font-size: 2.5rem; display: block; margin-bottom: 15px; }
+
+.feature-item h4 { color: var(--gold); margin-bottom: 15px; font-size: 1.2rem; }
+
+.feature-item p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
+
+.cta-box { background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%); padding: 60px; border-radius: 20px; border: 2px solid var(--gold); text-align: center; margin-top: 60px; }
+
+.cta-box h4 { font-size: 1.8rem; color: var(--gold); margin-bottom: 15px; }
+
+.cta-box p { color: var(--text-muted); margin-bottom: 30px; }
+
+.mural-filters { display: flex; justify-content: center; gap: 20px; margin-bottom: 50px; flex-wrap: wrap; }
+
+.filter-btn { padding: 12px 30px; background: transparent; border: 2px solid var(--gold); color: var(--gold); border-radius: 25px; cursor: pointer; font-weight: 600; transition: var(--transition); }
+
+.filter-btn:hover, .filter-btn.active { background: var(--gold); color: var(--darker); }
+
+.mural-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+
+.verified-badge { display: inline-block; padding: 4px 12px; background: rgba(212, 175, 55, 0.2); border: 1px solid var(--gold); border-radius: 20px; font-size: 0.75rem; color: var(--gold); font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
     <nav>
         <a onclick="showTab('sobre')">Sobre Nós</a>
         <a onclick="showTab('solicitar')">Para Empresas</a>
@@ -457,4 +489,115 @@
 </script>
 
 </body>
+    
+<!-- NEW CONTENT: ABA RAPIDO E SEGURO -->
+<section id="rapido-seguro" class="tab-content">
+  <h2 class="section-title">Rápido & Seguro</h2>
+  
+  <div class="guarantee-container">
+    <div class="guarantee-content">
+      <h3>Por que escolher a MúsicosBooKing?</h3>
+      <p>Somos a plataforma de booking mais rápida e segura de Portugal. Oferecemos:</p>
+      
+      <div class="guarantee-features">
+        <div class="feature-item">
+          <span class="feature-icon">⚡</span>
+          <h4>Resposta em até 3 horas</h4>
+          <p>Você recebe propostas de músicos verificados em tempo recorde. Sem esperas desnecessárias.</p>
+        </div>
+        
+        <div class="feature-item">
+          <span class="feature-icon">🔒</span>
+          <h4>Pagamento Seguro</h4>
+          <p>Sistema de escrow (caucão digital). O músico só recebe após conclusão impecável da performance.</p>
+        </div>
+        
+        <div class="feature-item">
+          <span class="feature-icon">📄</span>
+          <h4>Contratos Blindados</h4>
+          <p>Documentos juridicamente válidos que protegem ambas as partes. Sem sorpresas.</p>
+        </div>
+        
+        <div class="feature-item">
+          <span class="feature-icon">✅</span>
+          <h4>Artistas Verificados</h4>
+          <p>100% dos músicos passam por curadoria rigorosa. Apenas profissionais experientes.</p>
+        </div>
+        
+        <div class="feature-item">
+          <span class="feature-icon">🌟</span>
+          <h4>Substituição 24h</h4>
+          <p>Se houver imprevisto, garantimos um músico equivalente em tempo recorde.</p>
+        </div>
+        
+        <div class="feature-item">
+          <span class="feature-icon">🎉</span>
+          <h4>Saúde do Evento</h4>
+          <p>Nossa equipe acompanha cada detalhe. Seu evento merece que dê certo.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="cta-box">
+      <h4>Pronto para reservar o músico perfeito?</h4>
+      <p>Preencha um formulário simples e em poucas horas você terá propostas de músicos profissionais.</p>
+      <button class="btn btn-gold" onclick="showTab('para-empresas')">Fazer Pedido de Orçamento</button>
+    </div>
+  </div>
+</section>
+
+<!-- MURAL LIVE - NOTÍCIAS EM TEMPO REAL -->
+<section id="mural-live" class="tab-content">
+  <h2 class="section-title">Mural Live - Notícias em Tempo Real</h2>
+  
+  <div class="mural-filters">
+    <button class="filter-btn active" onclick="filterMural('empresas')">Para Empresas</button>
+    <button class="filter-btn" onclick="filterMural('musicos')">Para Músicos</button>
+  </div>
+  
+  <div id="mural-container" class="mural-grid"></div>
+</section>
+
+<!-- ANALYTICS / DADOS -->
+<section id="seguranca" class="tab-content">
+  <h2 class="section-title">Segurança & Garantias</h2>
+  
+  <div class="cards-grid">
+    <div class="card">
+      <span class="card-icon">🔎</span>
+      <h3>Curadoria de Elite</h3>
+      <p>Apenas músicos profissionais com experiência comprovada em palcos premium do Porto. Cada perfil é verificado pessoalmente pela nossa equipe.</p>
+    </div>
+    
+    <div class="card">
+      <span class="card-icon">💳</span>
+      <h3>Pagamento Escrow</h3>
+      <p>Seu dinheiro fica protegido em sistema de escrow. O artista só recebe após a conclusão impecável da performance.</p>
+    </div>
+    
+    <div class="card">
+      <span class="card-icon">⚡</span>
+      <h3>Substituição 24h</h3>
+      <p>Doença ou imprevisto? Nossa rede de prontidão garante um músico equivalente em tempo recorde.</p>
+    </div>
+    
+    <div class="card">
+      <span class="card-icon">📄</span>
+      <h3>Contratos Digitais</h3>
+      <p>Documentação juridicamente válida para cada gig, protegendo ambas as partes. Sem burocracia.</p>
+    </div>
+    
+    <div class="card">
+      <span class="card-icon">🌟</span>
+      <h3>Avaliações Verificadas</h3>
+      <p>Todos os clientes deixam avaliações públicas. Transparência total. Você sabe exatamente o que vai contratar.</p>
+    </div>
+    
+    <div class="card">
+      <span class="card-icon">📘</span>
+      <h3>Segurado</h3>
+      <p>A MúsicosBooKing oferece cobertura de segurança para cada evento. Você está protegido.</p>
+    </div>
+  </div>
+</section>
 </html>
