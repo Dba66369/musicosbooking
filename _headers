@@ -1,0 +1,18 @@
+/* Set proper MIME types for CSS and JavaScript files */
+/*.css
+  Content-Type: text/css; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/*.js
+  Content-Type: application/javascript; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/* HTML files with cache busting */
+/*.html
+  Content-Type: text/html; charset=utf-8
+  Cache-Control: public, max-age=300
+
+/* Force CSS to be served with correct MIME type */
+/*
+  X-Content-Type-Options: nosniff
+  Access-Control-Allow-Origin: *
