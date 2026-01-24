@@ -3,1018 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MúsicosBooKing | Plataforma de Booking de Músicos em Porto</title>
-    <meta name="description" content="Conectando talentos musicos,artistas com eventos memoráveis em Portugal e no mundo.">
-    
+    <title>MúsicosBooKing | Excelência em Eventos</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --gold: #D4AF37;
+            --dark: #0a0a0a;
+            --darker: #000000;
+            --gray: #1a1a1a;
+            --text-light: #ffffff;
+            --text-muted: #a0a0a0;
         }
 
-        body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #1a1a1a;
-            background: #fafafa;
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--darker); color: var(--text-light); line-height: 1.6; overflow-x: hidden; }
 
-        /* ===== HEADER ===== */
         header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            padding: 1rem 2rem;
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            background: rgba(0,0,0,0.9); border-bottom: 1px solid var(--gold);
+            padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;
         }
 
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--gold); text-decoration: none; text-transform: uppercase; letter-spacing: 2px; }
+        
+        nav ul { display: flex; list-style: none; gap: 20px; }
+        nav ul li a { color: var(--text-light); text-decoration: none; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        nav ul li a:hover { color: var(--gold); }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .btn-gold { 
+            background: var(--gold); color: var(--darker); padding: 0.8rem 1.5rem; 
+            border-radius: 4px; font-weight: 700; text-decoration: none; transition: 0.3s;
+            border: none; cursor: pointer;
         }
+        .btn-gold:hover { background: #fff; transform: translateY(-2px); }
 
-        nav a {
-            color: #666;
-            text-decoration: none;
-            font-weight: 500;
-            margin-left: 2rem;
-            transition: color 0.3s ease;
-            font-size: 0.95rem;
-        }
+        section { padding: 100px 2rem; display: none; max-width: 1200px; margin: 0 auto; animation: fadeIn 0.5s ease; }
+        #home { display: block; }
 
-        nav a:hover {
-            color: #7c3aed;
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* ===== HERO ===== */
-        .hero {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 6rem 2rem 4rem;
-            text-align: center;
+        .hero { 
+            height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            text-align: center; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=1920');
+            background-size: cover; background-position: center;
         }
+        .hero h1 { font-size: 4rem; color: var(--gold); margin-bottom: 1rem; text-transform: uppercase; }
+        .hero p { font-size: 1.2rem; max-width: 800px; margin-bottom: 2rem; color: #fff; }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-            color: #0a0a0a;
-        }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        .card { background: var(--gray); padding: 2rem; border-radius: 8px; border-left: 4px solid var(--gold); }
+        .card h3 { color: var(--gold); margin-bottom: 1rem; }
 
-        .hero h1 span {
-            background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: #666;
-            margin-bottom: 2.5rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 1.2rem 2.5rem;
-            font-size: 1rem;
-            font-weight: 600;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            min-width: 200px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
-            color: white;
-            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(124, 58, 237, 0.4);
-        }
-
-        .btn-secondary {
-            background: white;
-            color: #7c3aed;
-            border: 2px solid #7c3aed;
-        }
-
-        .btn-secondary:hover {
-            background: #f3f0ff;
-        }
-
-        /* ===== CARDS SECTION ===== */
-        .cards-section {
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            display: inline-block;
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.8rem;
-            color: #0a0a0a;
-        }
-
-        .card p {
-            color: #666;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .card .btn {
-            width: 100%;
-            min-width: unset;
-        }
-
-        /* ===== HOW IT WORKS ===== */
-        .how-it-works {
-            background: linear-gradient(135deg, #f3f0ff 0%, #fce7f3 100%);
-            padding: 5rem 2rem;
-            margin: 4rem 0;
-        }
-
-        .how-it-works h2 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3.5rem;
-            color: #0a0a0a;
-        }
-
-        .steps-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .step {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        .step-number {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
-            color: white;
-            border-radius: 50%;
-            line-height: 50px;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .step h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.8rem;
-            color: #0a0a0a;
-        }
-
-        .step p {
-            color: #666;
-            font-size: 0.95rem;
-        }
-
-        /* ===== FORM SECTION ===== */
-        .form-section {
-            max-width: 700px;
-            margin: 4rem auto;
-            padding: 3rem 2rem;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-section h2 {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            color: #0a0a0a;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #1a1a1a;
-            font-size: 0.95rem;
-        }
-
-        input, textarea, select {
-            width: 100%;
-            padding: 0.9rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: #7c3aed;
-            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .form-submit {
-            background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
-            color: white;
-            border: none;
-            padding: 1.2rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            width: 100%;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
-        }
-
-        .form-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(124, 58, 237, 0.4);
-        }
-
-        /* ===== FOOTER ===== */
-        footer {
-            background: #0f0f0f;
-            color: white;
-            padding: 3rem 2rem 1rem;
-            margin-top: 4rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h4 {
-            margin-bottom: 1rem;
-            color: #ec4899;
-        }
-
-        .footer-section a {
-            color: #999;
-            text-decoration: none;
-            font-size: 0.9rem;
-            display: block;
-            margin-bottom: 0.5rem;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: #ec4899;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid #333;
-            padding-top: 2rem;
-            text-align: center;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .hero p { font-size: 1rem; }
-            nav { display: none; }
-            .hero-buttons { flex-direction: column; align-items: center; }
-            .btn { width: 100%; }
-            .how-it-works h2 { font-size: 1.8rem; }
-        }
-
-		        /* Hidden sections - only show when clicked */
-        .hidden-section {
-            display: none !important;
-        }
+        form { background: var(--gray); padding: 3rem; border-radius: 12px; max-width: 600px; margin: 0 auto; }
+        input, select, textarea { width: 100%; padding: 12px; margin-bottom: 20px; background: #222; border: 1px solid #333; color: #fff; border-radius: 4px; }
+        
+        footer { background: var(--darker); padding: 4rem 2rem; text-align: center; border-top: 1px solid var(--gray); }
+        .legal-links { margin-top: 20px; }
+        .legal-links a { color: var(--text-muted); margin: 0 10px; text-decoration: none; font-size: 0.8rem; }
     </style>
 </head>
 <body>
-    <!-- HEADER -->
     <header>
-        <div class="header-container">
-            <div class="logo">🎵 MúsicosBooKing</div>
-            <nav>
-                <a href="#empresas">Para Empresas</a>
-                <a href="#musicos">Para Músicos</a>
-                <a href="#form">Solicitar</a>
-            </nav>
-        </div>
+        <a href="#" class="logo" onclick="showTab('home')">MúsicosBooKing</a>
+        <nav>
+            <ul>
+                <li><a onclick="showTab('home')">Início</a></li>
+                <li><a onclick="showTab('rapido')">Rápido e Seguro</a></li>
+                <li><a onclick="showTab('empresa')">Empresa & Eventos</a></li>
+                <li><a onclick="showTab('sobre')">Sobre Nós</a></li>
+                <li><a onclick="showTab('cadastro')" class="btn-gold">Registar Artista</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <!-- HERO -->
-    <section class="hero">
-        <h1>Encontramos os <span>músicos certos</span> para o seu evento</h1>
-        <p>Conectamos empresas e organizadores com artistas profissionais em Porto. Casamentos, eventos corporativos, restaurantes, festas.</p>
-        <div class="hero-buttons">
-            <button class="btn btn-primary" onclick="scrollTo('form')">Sou Empresa / Organizador</button>
-            <button class="btn btn-secondary" onclick="scrollTo('form-musico')">Sou Músico</button>
-        </div>
-    </section>
+    <div id="main-content">
+        <!-- HOME SECTION -->
+        <section id="home">
+            <div class="hero">
+                <h1>Excelência Musical</h1>
+                <p>Conectamos os melhores talentos de Portugal a eventos memoráveis. Experiência, profissionalismo e paixão em cada nota.</p>
+                <button class="btn-gold" onclick="showTab('cadastro')">Começar Agora</button>
+            </div>
+        </section>
 
-    <!-- CARDS -->
-    <section class="cards-section">
-        <div class="card" id="empresas">
-            <div class="card-icon">🎪</div>
-            <h3>Para Empresas & Eventos</h3>
-            <p>Procura músicos para seu evento? Envie uma proposta rápida e receba sugestões de artistas em menos de 2 horas.</p>
-            <button class="btn btn-primary" onclick="scrollTo('form')">Pedir Músicos</button>
-        </div>
+        <!-- RÁPIDO E SEGURO SECTION -->
+        <section id="rapido">
+            <h2 style="color: var(--gold); text-align: center; font-size: 2.5rem;">RÁPIDO E SEGURO</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Resposta Rápida</h3>
+                    <p>Receba orçamentos de artistas disponíveis em tempo recorde.</p>
+                </div>
+                <div class="card">
+                    <h3>Processo Simples</h3>
+                    <p>Escolha o estilo e a data. Nós tratamos de toda a logística e filtragem.</p>
+                </div>
+                <div class="card">
+                    <h3>Perfil Verificado</h3>
+                    <p>Trabalhamos apenas com músicos profissionais e avaliados.</p>
+                </div>
+            </div>
+        </section>
 
-        <div class="card" id="musicos">
-            <div class="card-icon">🎸</div>
-            <h3>Para Músicos & Artistas</h3>
-            <p>Registre-se como artista e comece a receber convites para tocar em eventos. Ganhe enquanto toca.</p>
-            <button class="btn btn-primary" onclick="scrollTo('form-musico')">Cadastro de Artista</button>
-        </div>
+        <!-- EMPRESA & EVENTOS SECTION -->
+        <section id="empresa">
+            <h2 style="color: var(--gold); text-align: center; font-size: 2.5rem;">EMPRESA & EVENTOS</h2>
+            <div style="text-align: center; margin-top: 30px;">
+                <p style="font-size: 1.2rem; margin-bottom: 30px;">Solicite músicos para seu evento corporativo, casamento ou festa privada com total confiança.</p>
+                <a href="mailto:contato@musicosbooking.pt" class="btn-gold">Solicitar Orçamento Personalizado</a>
+            </div>
+        </section>
 
-        <div class="card">
-            <div class="card-icon">⚡</div>
-            <h3>Rápido & Seguro</h3>
-            <p>Processo ágil, transparente e profissional. Sem taxas ocultas. Confiança garantida em cada booking.</p>
-        </div>
-    </section>
+        <!-- SOBRE NÓS SECTION -->
+        <section id="sobre">
+            <h2 style="color: var(--gold); text-align: center; font-size: 2.5rem;">QUEM SOMOS</h2>
+            <div style="margin-top: 30px; line-height: 1.8;">
+                <p>A MúsicosBooKing nasceu da necessidade de elevar o padrão do entretenimento musical em Portugal. Somos uma ponte entre o talento bruto e os momentos que marcam vidas.</p>
+                <p style="margin-top: 20px;">Nossa missão é garantir que cada evento tenha a banda sonora perfeita, com transparência e segurança absoluta para ambas as partes.</p>
+            </div>
+        </section>
 
-    <!-- HOW IT WORKS -->
-    <section class="how-it-works">
-        <h2>Como Funciona</h2>
-        <div class="steps-container">
-            <div class="step">
-                <div class="step-number">1</div>
-                <h3>Solicite</h3>
-                <p>Preencha o formulário com detalhes do seu evento: data, local, tipo de música, orçamento.</p>
-            </div>
-            <div class="step">
-                <div class="step-number">2</div>
-                <h3>Escolha</h3>
-                <p>Receba propostas de músicos profissionais. Compare perfis, avaliações e áudio/vídeo.</p>
-            </div>
-            <div class="step">
-                <div class="step-number">3</div>
-                <h3>Confirme</h3>
-                <p>Combine os detalhes finais e confirme o booking. Suporte em cada etapa do caminho.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FORM EMPRESA -->
-    <section class="form-section" id="form">
-        <h2>Solicite Músicos para Seu Evento</h2>
-        <form onsubmit="handleSubmit(event)">
-            <div class="form-group">
-                <label for="company-name">Nome da Empresa / Organizador *</label>
-                <input type="text" id="company-name" name="company" required>
-            </div>
-            <div class="form-group">
-                <label for="company-email">Email *</label>
-                <input type="email" id="company-email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="company-phone">Telefónico *</label>
-                <input type="tel" id="company-phone" name="phone" required>
-            </div>
-            <div class="form-group">
-                <label for="event-type">Tipo de Evento *</label>
-                <select id="event-type" name="event_type" required>
-                    <option value="">-- Selecione --</option>
-                    <option value="casamento">Casamento</option>
-                    <option value="corporativo">Evento Corporativo</option>
-                    <option value="restaurante">Restaurante / Bar</option>
-                    <option value="festaprivada">Festa Privada</option>
-                    <option value="hotel">Hotel</option>
-                    <option value="outro">Outro</option>
+        <!-- CADASTRO SECTION -->
+        <section id="cadastro">
+            <h2 style="color: var(--gold); text-align: center; font-size: 2.5rem; margin-bottom: 30px;">REGISTO DE ARTISTA</h2>
+            <form>
+                <input type="text" placeholder="Nome Artístico / Banda" required>
+                <input type="email" placeholder="Email Profissional" required>
+                <select required>
+                    <option value="">Estilo Musical Principal</option>
+                    <option>Jazz</option>
+                    <option>Pop/Rock</option>
+                    <option>Fado</option>
+                    <option>Clássico</option>
                 </select>
-            </div>
-            <div class="form-group">
-                <label for="event-date">Data do Evento *</label>
-                <input type="date" id="event-date" name="event_date" required>
-            </div>
-            <div class="form-group">
-                <label for="event-local">Local/Cidade *</label>
-                <input type="text" id="event-local" name="event_local" placeholder="Ex: Porto, Matosinhos" required>
-            </div>
-            <div class="form-group">
-                <label for="music-type">Tipo de Música / Músico Desejado *</label>
-                <input type="text" id="music-type" name="music_type" placeholder="Ex: DJ, Banda ao vivo, Violinista" required>
-            </div>
-            <div class="form-group">
-                <label for="budget">Orçamento Aproximado (EUR) *</label>
-                <input type="text" id="budget" name="budget" placeholder="Ex: 300-500" required>
-            </div>
-            <div class="form-group">
-                <label for="message">Detalhes Adicionais</label>
-                <textarea id="message" name="message" placeholder="Conte-nos mais sobre seu evento..."></textarea>
-            </div>
-            <button type="submit" class="form-submit">Enviar Solicitação</button>
-        </form>
-    </section>
+                <textarea placeholder="Breve biografia e links de portfólio" rows="5"></textarea>
+                <button type="submit" class="btn-gold" style="width: 100%;">Enviar Candidatura</button>
+            </form>
+        </section>
 
-    <!-- FORM MUSICO -->
-    <section class="form-section" id="form-musico">
-        <h2>Cadastre-se Como Músico/Artista</h2>
-        <form onsubmit="handleSubmit(event)">
-            <div class="form-group">
-                <label for="artist-name">Seu Nome *</label>
-                <input type="text" id="artist-name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="artist-email">Email *</label>
-                <input type="email" id="artist-email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="artist-phone">Telefónico *</label>
-                <input type="tel" id="artist-phone" name="phone" required>
-            </div>
-            <div class="form-group">
-                <label for="instrument">Instrumento / Especialidade *</label>
-                <input type="text" id="instrument" name="instrument" placeholder="Ex: Guitarra, Voz, DJ" required>
-            </div>
-            <div class="form-group">
-                <label for="experience">Anos de Experiência *</label>
-                <input type="number" id="experience" name="experience" placeholder="Ex: 5" required>
-            </div>
-            <div class="form-group">
-                <label for="rate">Taxa/Hora (EUR) *</label>
-                <input type="number" id="rate" name="rate" placeholder="Ex: 50" step="0.01" required>
-            </div>
-            <div class="form-group">
-                <label for="bio">Breve Bio / Descrição *</label>
-                <textarea id="bio" name="bio" placeholder="Fale sobre si, seu estilo, experiências..." required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="availability">Disponibilidade *</label>
-                <select id="availability" name="availability" required>
-                    <option value="">-- Selecione --</option>
-                    <option value="weekends">Fins de Semana</option>
-                    <option value="weekdays">Dias da Semana</option>
-                    <option value="flexible">Flexível</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="portfolio">Link de Portfólio / Vídeo (YouTube, Spotify)</label>
-                <input type="url" id="portfolio" name="portfolio" placeholder="Ex: https://youtube.com/...">
-            </div>
-            <button type="submit" class="form-submit">Cadastrar-me</button>
-
-
-			    </form>
-</section>
-
-<!-- ===== BLOG - RECENTES ===== -->
-<section id="blog" style="padding: 80px 2rem; background: #f9f9f9;">
-    <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
-        <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: #1a1a1a;">📰 Recentes do Blog</h2>
-        <p style="color: #666; margin-bottom: 3rem;">Novidades, dicas e tendências do mundo da música</p>
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-            <!-- Post 1 -->
-            <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s;">
-                <div style="height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
-                <div style="padding: 1.5rem;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: #1a1a1a;">Músicas Populares para Casamentos 2026</h3>
-                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">Descubra as músicas mais pedidas para cerimônias e recepções...</p>
-                    <span style="color: #9333ea; font-size: 0.85rem;">54 visualizações • 2 comentários</span>
+        <!-- LEGAL SECTION -->
+        <section id="legal">
+            <h2 style="color: var(--gold); text-align: center; font-size: 2.5rem;">TERMOS E POLÍTICA</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Termos de Uso</h3>
+                    <p>Ao utilizar nossa plataforma, você concorda com a excelência e o respeito mútuo entre artistas e contratantes...</p>
+                </div>
+                <div class="card">
+                    <h3>Privacidade</h3>
+                    <p>Seus dados estão seguros e são utilizados exclusivamente para a conexão entre talentos e eventos.</p>
                 </div>
             </div>
-            
-            <!-- Post 2 -->
-            <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                <div style="height: 200px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
-                <div style="padding: 1.5rem;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: #1a1a1a;">Como Escolher Músicos para Eventos Corporativos</h3>
-                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">Dicas profissionais para contratar artistas ideais...</p>
-                    <span style="color: #9333ea; font-size: 0.85rem;">103 visualizações • 5 comentários</span>
-                </div>
-            </div>
-            
-            <!-- Post 3 -->
-            <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                <div style="height: 200px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
-                <div style="padding: 1.5rem;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: #1a1a1a;">Tendências de Eventos em Porto 2026</h3>
-                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">O que está em alta nos eventos da cidade...</p>
-                    <span style="color: #9333ea; font-size: 0.85rem;">87 visualizações • 3 comentários</span>
-                </div>
-            </div>
-        </div>
+        </section>
     </div>
-</section>
-        </form>
-    </section>
 
-    <!-- FOOTER -->
-
-	<!-- ===== DEPOIMENTOS ===== -->
-<section id="depoimentos" style="padding: 80px 2rem; background: #1a1a1a; color: white;">
-    <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
-        <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: #d4af37;">💬 Depoimentos</h2>
-        <p style="color: #ccc; margin-bottom: 3rem;">O que nossos clientes dizem sobre nós</p>
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-            <!-- Depoimento 1 -->
-            <div style="background: #2a2a2a; padding: 2rem; border-radius: 12px; border: 2px solid #d4af37;">
-                <div style="margin-bottom: 1rem;">
-                    <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #d4af37, #f4e4c1); margin: 0 auto 1rem;"></div>
-                    <h4 style="color: #d4af37; margin-bottom: 0.5rem;">Ana Silva</h4>
-                    <p style="color: #999; font-size: 0.9rem; margin-bottom: 1rem;">Casamento • Dezembro 2025</p>
-                    <div style="color: #d4af37; font-size: 1.2rem; margin-bottom: 1rem;">⭐️⭐️⭐️⭐️⭐️</div>
-                </div>
-                <p style="color: #ddd; font-style: italic; line-height: 1.6;">"Excelentes profissionais! A música do nosso casamento foi perfeita. Todos os convidados elogiaram. Muito obrigada MúsicosBooking!"</p>
-            </div>
-            
-            <!-- Depoimento 2 -->
-            <div style="background: #2a2a2a; padding: 2rem; border-radius: 12px; border: 2px solid #d4af37;">
-                <div style="margin-bottom: 1rem;">
-                    <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); margin: 0 auto 1rem;"></div>
-                    <h4 style="color: #d4af37; margin-bottom: 0.5rem;">João Costa</h4>
-                    <p style="color: #999; font-size: 0.9rem; margin-bottom: 1rem;">Evento Corporativo • Janeiro 2026</p>
-                    <div style="color: #d4af37; font-size: 1.2rem; margin-bottom: 1rem;">⭐️⭐️⭐️⭐️⭐️</div>
-                </div>
-                <p style="color: #ddd; font-style: italic; line-height: 1.6;">"Processo rápido e profissional. Conseguimos músicos de qualidade para o evento da empresa. Recomendo!"</p>
-            </div>
-            
-            <!-- Depoimento 3 -->
-            <div style="background: #2a2a2a; padding: 2rem; border-radius: 12px; border: 2px solid #d4af37;">
-                <div style="margin-bottom: 1rem;">
-                    <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #f093fb, #f5576c); margin: 0 auto 1rem;"></div>
-                    <h4 style="color: #d4af37; margin-bottom: 0.5rem;">Maria Santos</h4>
-                    <p style="color: #999; font-size: 0.9rem; margin-bottom: 1rem;">Festa Privada • Novembro 2025</p>
-                    <div style="color: #d4af37; font-size: 1.2rem; margin-bottom: 1rem;">⭐️⭐️⭐️⭐️⭐️</div>
-                </div>
-                <p style="color: #ddd; font-style: italic; line-height: 1.6;">"Adorei! Os músicos foram incríveis e fizeram da nossa festa um momento inesquecível. Muito talento!"</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-	<!-- ===== CASAMENTOS.PT BADGE ===== -->
-<section id="casamentos-pt" style="padding: 60px 2rem; background: white; text-align: center;">
-    <div style="max-width: 800px; margin: 0 auto;">
-        <h2 style="font-size: 2rem; margin-bottom: 2rem; color: #1a1a1a;">💍 Recomendado em Casamentos.pt</h2>
-        
-        <div style="display: inline-block; padding: 2rem; background: #f9f9f9; border-radius: 12px; border: 3px solid #d4af37;">
-            <div style="font-size: 4rem; margin-bottom: 1rem;">🎉</div>
-            <h3 style="color: #d4af37; margin-bottom: 1rem;">MúsicosBooking</h3>
-            <p style="color: #666; margin-bottom: 1rem;">15 opiniões</p>
-            <div style="color: #d4af37; font-size: 1.5rem; margin-bottom: 1rem;">⭐️⭐️⭐️⭐️⭐️</div>
-            <p style="color: #1a1a1a; font-weight: 600; font-size: 1.2rem;">5.0 de 5</p>
-        </div>
-        
-        <p style="margin-top: 2rem; color: #666;">Avaliado por casais reais em <strong>Casamentos.pt</strong></p>
-        <a href="https://www.casamentos.pt" target="_blank" style="display: inline-block; margin-top: 1rem; padding: 12px 30px; background: #9333ea; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: background 0.3s;">Ver Todas as Opiniões</a>
-    </div>
-</section>
     <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Somos</h4>
-                <a href="#quem-somos">Sobre Nos</a>
-                <a href="#">Blog</a>
-                <a href="#">Carreiras</a>
-            </div>
-            <div class="footer-section">
-                <h4>Suporte</h4>
-                <a href="#faq">FAQ</a>
-                <a href="#contacto">Contacte-nos</a>
-                <a href="#status">Status</a>
-            </div>
-            <div class="footer-section">
-                <h4>Legal</h4>
-				                    <a href="#termos">Termos & Condicoes</a>
-				                    <a href="#privacidade">Politica de Privacidade</a>
-				                    <a href="#cookies">Cookies</a>
-                <a href="#">href="#termos"</a>
-                <a href="#">Politica de Privacidade</a>
-                <a href="#">Cookies</a>
-            </div>
-            <div class="footer-section">
-                <h4>Redes Sociais</h4>
-                <a href="#">Instagram</a>
-                <a href="#">Facebook</a>
-                <a href="#">TikTok</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 MusicosBooKing - Porto. Todos os direitos reservados.</p>
+        <p>&copy; 2024 MúsicosBooKing. Todos os direitos reservados.</p>
+        <div class="legal-links">
+            <a onclick="showTab('legal')">Termos e Condições</a>
+            <a onclick="showTab('legal')">Política de Privacidade</a>
         </div>
     </footer>
 
     <script>
-        function scrollTo(elementId) {
-            const element = document.getElementById(elementId);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        function handleSubmit(event) {
-            event.preventDefault();
-            alert('Obrigado! Sua solicitacao foi recebida. Entraremos em contato em breve!');
-            event.target.reset();
+        function showTab(id) {
+            const sections = ['home', 'rapido', 'empresa', 'sobre', 'cadastro', 'legal'];
+            sections.forEach(s => {
+                document.getElementById(s).style.display = (s === id) ? 'block' : 'none';
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
-
-    <!-- EmailJS Library -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/index.min.js"></script>
-<script>
-  emailjs.init("WsTHhr1WSMPzRqlpO");
-</script>
-
-<!-- EmailJS Form Handlers -->
-<script>
-  // Form Empresa Handler
-  const empresaForm = document.getElementById("empresaForm");
-  if (empresaForm) {
-    empresaForm.addEventListener("submit", function(e) {
-      e.preventDefault();
-      emailjs.send("service_k9c6pdj", "template_8jf2sc8", {
-        nome_empresa: document.getElementById("empresa").value,
-        contacto: document.getElementById("contacto").value,
-        email: document.getElementById("email_empresa").value,
-        telefone: document.getElementById("telefone_empresa").value,
-        tipo_evento: document.getElementById("tipo").value,
-        data_evento: document.getElementById("data").value,
-        descricao: document.getElementById("descricao").value
-      }).then(function() {
-        alert("✅ Pedido enviado com sucesso! Entraremos em contacto em breve.");
-        empresaForm.reset();
-      });
-    });
-  }
-  
-  // Form Musico Handler
-  const musicoForm = document.getElementById("musicoForm");
-  if (musicoForm) {
-    musicoForm.addEventListener("submit", function(e) {
-      e.preventDefault();
-      emailjs.send("service_k9c6pdj", "template_1759rog", {
-        nome_musico: document.getElementById("nomeMusico").value,
-        genero_musical: document.getElementById("genero").value,
-        biografia: document.getElementById("biografia").value,
-        disponibilidade: document.getElementById("disponibilidade").value,
-        tarifa: document.getElementById("tarifa").value,
-        email: document.getElementById("email_musico").value,
-        telefone: document.getElementById("telefone_musico").value
-      }).then(function() {
-        alert("✅ Proposta enviada com sucesso! Avaliaremos em breve.");
-        musicoForm.reset();
-      });
-    });
-  }
-</script>
-
-    <!-- ===== SECÇÃO: QUEM SOMOS ===== -->
-	<section id="quem-somos" class="section hidden-section">
-    <div class="container">
-        <h2>Quem Somos</h2>
-        <p>A <strong>MúsicosBooKing</strong> nasceu de uma paixão genuína pela música e de mais de 20 anos de experiência no ramo. O criador da plataforma, um músico profissional com uma trajetória extensa no mundo dos eventos e performances, vivenciou na prática a importância crítica de conectar os músicos certos com os repertórios certos aos eventos certos.</p>
-        
-        <p>Durante anos trabalhando como artista profissional, ficou evidente um desafio recorrente: tanto as empresas quanto os organizadores de eventos enfrentavam dificuldades para encontrar músicos com as competências e estilos específicos necessários. Simultaneamente, muitos músicos talentosos não conseguiam visibilidade ou acesso a oportunidades de qualidade.</p>
-        
-        <p>Essa experiência de primeira mão inspirou a criação da MúsicosBooKing: uma plataforma pensada para eliminar esse gap. Nosso objetivo é criar um ecossistema onde:</p>
-        
-        <ul>
-            <li><strong>Empresas e Eventos</strong> encontram rapidamente os artistas ideais, economizando tempo e garantindo qualidade nas suas festas, casamentos, eventos corporativos e muito mais.</li>
-            <li><strong>Músicos e Artistas</strong> têm acesso a oportunidades genuínas de trabalho, em eventos onde sua arte é verdadeiramente valorizada.</li>
-            <li><strong>Transparência e Profissionalismo</strong> guiam cada interação, com tarifas claras, prazos respeitados e resultados memoráveis.</li>
-        </ul>
-        
-        <p>A MúsicosBooKing não é apenas uma plataforma de booking – é um movimento para elevar o padrão dos eventos musicais em Portugal. Acreditamos que quando a combinação perfeita entre artista e evento acontece, todos ganham: o cliente recebe uma performance memorável, o músico trabalha em um ambiente onde é respeitado e bem remunerado, e a comunidade musical em Porto prospera.</p>
-        
-        <p style="margin-top: 1.5rem; font-style: italic; color: #666;">Porque todo evento merece a melhor música. E todo músico merece ser visto e valorizado.</p>
-    </div>
-</section>
-<section id="quem-somos" style="padding: 60px 2rem; background: linear-gradient(135deg, rgba(147, 51, 234, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%); max-width: 1200px; margin: 60px auto;">
-  <div style="max-width: 600px; margin: 0 auto; text-align: center;">
-    <h2 style="font-size: 2.5rem; margin-bottom: 20px; color: #1a1a1a;">Quem Somos</h2>
-    <p style="font-size: 1.1rem; line-height: 1.8; color: #555; margin-bottom: 20px;">
-      A <strong>MúsicosBooKing</strong> é uma plataforma inovadora que conecta empresas e organizadores de eventos com músicos profissionais em Porto.
-    </p>
-    <p style="font-size: 1rem; line-height: 1.8; color: #666;">
-      Nossa missão é simplificar o processo de contratação de músicos, garantindo qualidade, profissionalismo e transparência em cada evento. Facilitamos conexões entre artistas talentosos e clientes que procuram performances memoráveis.
-    </p>
-  </div>
-</section>
-
-<!-- ===== SECÇÃO: FAQ ===== -->
-<section id="faq class="hidden-section"" style="padding: 60px 2rem; background: #fafafa; max-width: 1200px; margin: 0 auto;">
-  <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 50px; color: #1a1a1a;">Perguntas Frequentes</h2>
-  <div style="display: grid; gap: 20px;">
-    <div style="background: white; padding: 20px; border-left: 4px solid #9333ea; border-radius: 8px;">
-      <h3 style="color: #9333ea; margin-bottom: 10px;">Como funciona a plataforma?</h3>
-      <p style="color: #555;">Empresas preenchem um formulário com detalhes do evento. Recebemos a solicitação e conectamos com músicos disponíveis. Você recebe propostas em menos de 2 horas.</p>
-    </div>
-    <div style="background: white; padding: 20px; border-left: 4px solid #9333ea; border-radius: 8px;">
-      <h3 style="color: #9333ea; margin-bottom: 10px;">Qual é o tempo de resposta?</h3>
-      <p style="color: #555;">Respondemos a todas as solicitações em até 3 horas. Para eventos urgentes, podemos ajudar em 30 minutos.</p>
-    </div>
-    <div style="background: white; padding: 20px; border-left: 4px solid #9333ea; border-radius: 8px;">
-      <h3 style="color: #9333ea; margin-bottom: 10px;">Os músicos são profissionais?</h3>
-      <p style="color: #555;">Sim! Todos os músicos na plataforma são artistas verificados com experiência profissional comprovada.</p>
-    </div>
-    <div style="background: white; padding: 20px; border-left: 4px solid #9333ea; border-radius: 8px;">
-      <h3 style="color: #9333ea; margin-bottom: 10px;">Qual é a tarifa média?</h3>
-      <p style="color: #555;">As tarifas variam de €100 a €500+ por hora, dependendo do artista e tipo de evento. Recebe propostas conforme sua necessidade.</p>
-    </div>
-    <div style="background: white; padding: 20px; border-left: 4px solid #9333ea; border-radius: 8px;">
-      <h3 style="color: #9333ea; margin-bottom: 10px;">Há garantia de qualidade?</h3>
-      <p style="color: #555;">Sim! Verificamos todos os artistas, temos avaliações de clientes anteriores e garantia de satisfação.</p>
-    </div>
-    <div style="background: white; padding: 20px; border-left: 4px solid #9333ea; border-radius: 8px;">
-      <h3 style="color: #9333ea; margin-bottom: 10px;">Como os músicos recebem pagamento?</h3>
-      <p style="color: #555;">O pagamento é acordado diretamente entre  e a musicosbooking e a empresa. Recomendamos transferência bancária ou acordo anterior.</p>
-    </div>
-	  
-        <div style="background: white; padding: 20px; border-left: 4px solid #9333ea; border-radius: 8px;">
-          <h3 style="color: #9333ea; margin-bottom: 10px;">Quanto custa?</h3>
-          <p style="color: #555;">Empresas pagam a tarifa acordada do músico + 20% de comissão. Os músicos recebem 80% do valor total. <strong>Contratos:</strong> Parceria mínima de 3 anos. <strong>Obrigações do Músico:</strong> ✓ Comparecer ao local com 60 minutos de antecedência.</p>
-        </div>
-  </div>
-</section>
-
-<!-- ===== SECÇÃO: STATUS/BLOG ===== -->
-<section id="status" class="hidden-section" style="padding: 60px 2rem; background: white; max-width: 1200px; margin: 60px auto;">
-  <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 50px; color: #1a1a1a;">Últimas Notícias</h2>
-  <div style="display: grid; gap: 30px;">
-    <div style="background: #f0f4ff; padding: 25px; border-radius: 12px; border-left: 4px solid #9333ea;">
-      <h3 style="color: #9333ea; margin-bottom: 10px;">🎵 Janeiro 2025: Plataforma ao Vivo!</h3>
-      <p style="color: #555; margin: 0;">MúsicosBooKing está oficialmente online! Já temos 50+ músicos registados e 100+ solicitações processadas com sucesso.</p>
-    </div>
-    <div style="background: #f0f4ff; padding: 25px; border-radius: 12px; border-left: 4px solid #ec4899;">
-      <h3 style="color: #ec4899; margin-bottom: 10px;">🚀 Em Breve: Pagamentos Integrados</h3>
-      <p style="color: #555; margin: 0;">Estamos a desenvolver um sistema de pagamento integrado para maior segurança e conveniência.</p>
-    </div>
-    <div style="background: #f0f4ff; padding: 25px; border-radius: 12px; border-left: 4px solid #0ea5e9;">
-      <h3 style="color: #0ea5e9; margin-bottom: 10px;">📱 Em Desenvolvimento: Aplicação Mobile</h3>
-      <p style="color: #555; margin: 0;">App iOS e Android em desenvolvimento para facilitar ainda mais o booking de músicos.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ===== FOOTER EXPANDIDO ===== -->
-<footer style="background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%); color: white; padding: 60px 2rem 30px; margin-top: 80px;">
-  <div style="max-width: 1200px; margin: 0 auto;">
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px;">
-      <!-- Coluna 1: Sobre -->
-      <div>
-        <h4 style="margin-bottom: 15px; font-size: 1.1rem;">MúsicosBooKing</h4>
-        <p style="opacity: 0.9; font-size: 0.95rem;">Conectando talentos musicais com eventos memoráveis em Porto.</p>
-        <p style="opacity: 0.8; font-size: 0.85rem; margin-top: 10px;">© 2025 MúsicosBooKing. Todos os direitos reservados.</p>
-      </div>
-      <!-- Coluna 2: Links Rápidos -->
-      <div>
-        <h4 style="margin-bottom: 15px; font-size: 1.1rem;">Links Rápidos</h4>
-        <ul style="list-style: none; padding: 0;">
-          <li><a href="#quem-somos" style="color: white; text-decoration: none; opacity: 0.9; display: block; margin-bottom: 8px;">Quem Somos</a></li>
-          <li><a href="#faq" style="color: white; text-decoration: none; opacity: 0.9; display: block; margin-bottom: 8px;">FAQ</a></li>
-          <li><a href="#status" style="color: white; text-decoration: none; opacity: 0.9; display: block; margin-bottom: 8px;">Notícias</a></li>
-          <li><a href="#termos" style="color: white; text-decoration: none; opacity: 0.9; display: block; margin-bottom: 8px;">Termos</a></li>
-        </ul>
-      </div>
-      <!-- Coluna 3: Legal -->
-      <div>
-        <h4 style="margin-bottom: 15px; font-size: 1.1rem;">Legal</h4>
-        <ul style="list-style: none; padding: 0;">
-          <li><a href="#privacidade" style="color: white; text-decoration: none; opacity: 0.9; display: block; margin-bottom: 8px;">Política de Privacidade</a></li>
-          <li><a href="#termos" style="color: white; text-decoration: none; opacity: 0.9; display: block; margin-bottom: 8px;">Termos de Uso</a></li>
-          <li><a href="#contacto" style="color: white; text-decoration: none; opacity: 0.9; display: block; margin-bottom: 8px;">Contacto</a></li>
-          <li><a href="#cookies" style="color: white; text-decoration: none; opacity: 0.9; display: block; margin-bottom: 8px;">Política de Cookies</a></li>
-        </ul>
-      </div>
-      <!-- Coluna 4: Contacto -->
-      <div>
-        <h4 style="margin-bottom: 15px; font-size: 1.1rem;">Contacto</h4>
-        <p style="opacity: 0.9; font-size: 0.95rem; margin-bottom: 8px;">📧 info@musicosbooking.pt</p>
-        <p style="opacity: 0.9; font-size: 0.95rem; margin-bottom: 8px;">📞 +351 910700868 / +351 920094057</p>
-        <p style="opacity: 0.9; font-size: 0.95rem;">📍 Porto, Portugal</p>
-      </div>
-    </div>
-    <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.2); margin: 30px 0;">
-    <div style="text-align: center; font-size: 0.9rem; opacity: 0.8;">
-      <p>Desenvolvido com a verdadeira intenção de conectar pessoas atraves da musica em Portugal e no Mundo | Versão 1.0</p>
-    </div>
-  </div>
-</footer>
-
-<!-- ===== HIDDEN SECTIONS: TERMOS, PRIVACIDADE, ETC ===== -->
-<!-- Estas secções podem ser expandidas em páginas futuras -->
-<div id="termos"  class="hidden-section"style="padding: 60px 2rem; max-width: 1200px; margin: 0 auto;">
-  <h2>Termos e Condições</h2>
-  <h2>Termos e Condições</h2><h3>1. Aceitação dos Termos</h3><p>Ao aceder e utilizar a plataforma MusicosBooking (doravante "Plataforma"), você concorda em cumprir estes Termos e Condições. Se não concordar com alguma parte, por favor, não utilize a Plataforma.</p><h3>2. Definições</h3><p><strong>Empresa/Organizador:</strong> Pessoa ou entidade que procura serviços de músicos para eventos.<br><strong>Músico/Artista:</strong> Profissional que oferece serviços musicais na Plataforma.<br><strong>Evento:</strong> Ocasião para qual a Empresa solicita serviços de músicos.</p><h3>3. Cadastro e Responsabilidades</h3><p>Os utilizadores são responsáveis pela exatidão das informações fornecidas durante o cadastro. Cada utilizador concorda em manter a confidenicialidade das suas credenciais de acesso. A MusicosBooking não se responsabiliza pelo acesso não autorizado à sua conta.</p><h3>4. Política de Cancelamento</h3><p>Cancelamentos devem ser comunicados com no mínimo 48 horas de antecedência do evento. Cancelamentos com menos de 48 horas poderão estar sujeitos a taxas conforme acordado previamente. A MusicosBooking não responsabiliza-se por perdas decorrentes de cancelamentos.</p><h3>5. Pagamentos</h3><p>O pagamento é acordado diretamente entre a Empresa e o Músico. A MusicosBooking não gerencia transferencias diárias de dinheiro. Recomenda-se o uso de transferência bancária ou outras formas seguras de pagamento. Ambas as partes são responsáveis pelo cumprimento dos seus obrigações de pagamento.</p><h3>6. Limitação de Responsabilidade</h3><p>A Plataforma é fornecida "como está", sem garantias de qualquer tipo. A MusicosBooking não é responsável por danos diretos, indiretos, incidentais ou consequentes decorrentes do uso da Plataforma.</p><h3>7. Lei Aplicável</h3><p>Estes Termos são regidos pela lei de Portugal. Qualquer controvérsia será resolvida nos tribunais competentes de Porto.</p><p style="margin-top: 2rem; font-style: italic; color: #666;"><strong>Versão 1.0 - Janeiro 2026</strong></p></div>
-</div>
-
-<div id="privacidade"  class="hidden-section"style="padding: 60px 2rem; max-width: 1200px; margin: 0 auto;">
-  <h2>Política de Privacidade</h2>
-  <p>Política de privacidade c<h2>Política de Privacidade</h2><h3>1. Introdução</h3><p>A MusicosBooking respeita a sua privacidade e está comprometida em proteger os seus dados pessoais. Esta Política de Privacidade descreve como recolhemos, utilizamos e protegemos as suas informações.</p><h3>2. Informações que Recolhemos</h3><p>Durante o cadastro e utilização da Plataforma, podemos recolher:<br>- Nome completo<br>- Endereço de email<br>- Número de telefone<br>- Informações profissionais (para músicos)<br>- Detalhes de eventos (para empresas)<br>- Informações de pagamento (processadas de forma segura)</p><h3>3. Como Utilizamos os Seus Dados</h3><p>Utilizamos os seus dados pessoais para:<br>- Facilitar a comunicação entre empresas e músicos<br>- Processar solicitações de eventos<br>- Enviar notificações e atualizações<br>- Melhorar a qualidade do serviço<br>- Cumprir obrigações legais</p><h3>4. Proteção de Dados</h3><p>Implementamos medidas de segurança apropriadas para proteger os seus dados pessoais contra acesso não autorizado, alteração ou divulgação. No entanto, nenhum método de transmissão pela internet é 100% seguro.</p><h3>5. Partilha de Dados</h3><p>Apenas partilhamos os seus dados com terceiros quando necessário para fornecer o serviço (ex: processadores de pagamento). Não vendemos ou alugamos os seus dados pessoais a terceiros.</p><h3>6. Direitos do Utilizador</h3><p>Você tem direito a:<br>- Aceder aos seus dados pessoais<br>- Solicitar a correção de dados inexatos<br>- Solicitar a eliminção dos seus dados<br>- Objecção ao processamento dos seus dados</p><h3>7. Retenção de Dados</h3><p>Mantemos os seus dados pessoais enquanto a sua conta estiver ativa. Após a eliminação da conta, os seus dados serão removidos dentro de 30 dias, salvo se a lei exigir a sua retenção.</p><h3>8. Contacto</h3><p>Para questões sobre a nossa Política de Privacidade, por favor contacte-nos em: <strong>info@musicosbooking.pt</strong></p><p style="margin-top: 2rem; font-style: italic; color: #666;"><strong>Versão 1.0 - Janeiro 2026</strong></p></div>
-</div>
-	
-
-			<!-- TARIFAS SECTION -->
-			<div id="tarifas" style="padding: 60px 2rem; max-width: 1200px; margin: 0 auto;">
-				<h2>Tarifas</h2>
-				<p>As tarifas variam de €100 a €500+ por hora, dependendo do artista e tipo de evento. Recebe propostas conforme sua necessidade.</p>
-			</div>
-
-			<!-- TEMPO DE RESPOSTA SECTION -->
-			<div id="tempo-resposta" style="padding: 60px 2rem; max-width: 1200px; margin: 0 auto;">
-				<h2>Tempo de Resposta</h2>
-				<p>Respondemos a todas as solicitações em até 24 horas. Para eventos urgentes, podemos ajudar em 2 horas.</p>
-			</div>
-
-			<!-- COMO FUNCIONA SECTION -->
-			<div id="como-funciona" style="padding: 60px 2rem; max-width: 1200px; margin: 0 auto;">
-				<h2>Como Funciona</h2>
-				<p>Empresas preenchem um formulário com detalhes do evento. Recebemos a solicitação e conectamos com músicos disponíveis. Você recebe propostas em menos de 24 horas.</p>
-			</div>
-
-<div id="contacto" style="padding: 60px 2rem; max-width: 1200px; margin: 0 auto;">
-  <h2>Contacto</h2>
-  <p>Contacto: +351 910700868 / +351 920094057</p>
-    
-		<div id="documentos" style="padding: 60px 2rem; max-width: 1200px; margin: 0 auto;">
-			<h2>Documentos e Links Úteis</h2>
-			<div style="margin-top: 30px; display: flex; gap: 20px; flex-wrap: wrap;">
-				<a href="documentos.html" style="padding: 15px 30px; background: #667eea; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; transition: all 0.3s;" onmouseover="this.style.background='#764ba2'" onmouseout="this.style.background='#667eea'">📋 Ver Todos os Documentos</a>
-				<a href="documentos.html" style="padding: 15px 30px; background: #667eea; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; transition: all 0.3s;" onmouseover="this.style.background='#764ba2'" onmouseout="this.style.background='#667eea'">❓ FAQ</a>
-				<a href="documentos.html" style="padding: 15px 30px; background: #667eea; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; transition: all 0.3s;" onmouseover="this.style.background='#764ba2'" onmouseout="this.style.background='#667eea'">🔒 Privacidade</a>
-				<a href="documentos.html" style="padding: 15px 30px; background: #667eea; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; transition: all 0.3s;" onmouseover="this.style.background='#764ba2'" onmouseout="this.style.background='#667eea'">📜 Termos</a>
-			</div>
-		</div>
-</div>
-
-		<!-- ===== RÁPIDO E SEGURO ===== -->
-	<section id="rapido-seguro" class="section" style="padding: 80px 2rem; max-width: 1200px; margin: 0 auto;">
-		<h2 style="text-align: center; margin-bottom: 1rem; font-size: 2.5rem; color: #1a1a1a;">Rápido e Seguro</h2>
-		<p style="text-align: center; max-width: 600px; margin: 0 auto 3rem; font-size: 1.1rem; color: #666;">Encontra o artista certo em poucos minutos, com um processo simples, transparente e pensado tanto para clientes como para músicos.</p>
-		
-		<ul style="list-style: none; max-width: 900px; margin: 0 auto; display: grid; gap: 20px;">
-			<li style="padding: 20px; background: #f5f5f5; border-radius: 8px;">
-				<strong style="color: #D946EF;">Resposta rápida</strong>: faz o pedido de orçamento e recebe propostas dos artistas disponíveis em pouco tempo.
-			</li>
-			<li style="padding: 20px; background: #f5f5f5; border-radius: 8px;">
-				<strong style="color: #D946EF;">Processo simples</strong>: escolhe o tipo de evento, data, cidade e estilo musical, e nós tratamos da filtragem dos artistas.
-			</li>
-			<li style="padding: 20px; background: #f5f5f5; border-radius: 8px;">
-				<strong style="color: #D946EF;">Perfil verificado</strong>: trabalhamos com artistas avaliados, com portfólio real e experiência em eventos.
-			</li>
-			<li style="padding: 20px; background: #f5f5f5; border-radius: 8px;">
-				<strong style="color: #D946EF;">Comunicação organizada</strong>: concentra toda a conversa sobre o evento num só lugar, sem perder mensagens.
-			</li>
-			<li style="padding: 20px; background: #f5f5f5; border-radius: 8px;">
-				<strong style="color: #D946EF;">Transparência</strong>: combina cachet, horários e necessidades técnicas de forma clara antes de confirmar o evento.
-			</li>
-		</ul>
-	</section>
-
-		<!-- ===== SOU ARTISTA ===== -->
-	<section id="sou-artista" class="section" style="padding: 80px 2rem; max-width: 1200px; margin: 0 auto; background: linear-gradient(135deg, #D946EF 0%, #9333ea 100%); color: white;">
-		<div style="max-width: 600px; margin: 0 auto; text-align: center;">
-			<h2 style="margin-bottom: 1rem; font-size: 2.5rem; color: white;">Sou Artista</h2>
-			<p style="margin-bottom: 2rem; font-size: 1.1rem;">Regista-te na <strong>MúsicosBooking</strong> e começa a receber pedidos de atuação para eventos em todo o país.</p>
-			
-			<div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 3rem; flex-wrap: wrap;">
-				<a href="#form-artista" style="padding: 12px 30px; background: white; color: #D946EF; border: none; border-radius: 6px; text-decoration: none; font-weight: 600; cursor: pointer; transition: all 0.3s;">Cadastrar Artista</a>
-				<a href="#login-artista" style="padding: 12px 30px; background: transparent; color: white; border: 2px solid white; border-radius: 6px; text-decoration: none; font-weight: 600; cursor: pointer; transition: all 0.3s;">Já tenho conta</a>
-			</div>
-		</div>
-	</section>
-	
-	<!-- ===== FORMULÁRIO DE CADASTRO ===== -->
-	<section id="form-artista" class="section" style="padding: 80px 2rem; max-width: 800px; margin: 0 auto;">
-		<h2 style="text-align: center; margin-bottom: 2rem; font-size: 2rem; color: #1a1a1a;">Criar Perfil de Artista</h2>
-		
-		<form style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-			<div style="margin-bottom: 1.5rem;">
-				<label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1a1a1a;">Nome Artístico</label>
-				<input type="text" name="nome_artistico" placeholder="Ex.: Duo Porto Strings" required style="width: 100%; padding: 10px 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; font-family: inherit;">
-			</div>
-			
-			<div style="margin-bottom: 1.5rem;">
-				<label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1a1a1a;">Estilo Musical</label>
-				<input type="text" name="estilo" placeholder="Ex.: Clássico, Jazz, Pop" required style="width: 100%; padding: 10px 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; font-family: inherit;">
-			</div>
-			
-			<div style="margin-bottom: 1.5rem;">
-				<label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1a1a1a;">Cidade / Região</label>
-				<input type="text" name="cidade" placeholder="Ex.: Porto, Lisboa" required style="width: 100%; padding: 10px 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; font-family: inherit;">
-			</div>
-			
-			<div style="margin-bottom: 1.5rem;">
-				<label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1a1a1a;">Email</label>
-				<input type="email" name="email" placeholder="teuemail@exemplo.com" required style="width: 100%; padding: 10px 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; font-family: inherit;">
-			</div>
-			
-			<div style="margin-bottom: 2rem;">
-				<label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1a1a1a;">Redes Sociais / Portfólio</label>
-				<input type="url" name="portfolio" placeholder="Link do Instagram, YouTube, site, etc." style="width: 100%; padding: 10px 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; font-family: inherit;">
-			</div>
-			
-			<button type="submit" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #D946EF 0%, #9333ea 100%); color: white; border: none; border-radius: 6px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s;">Criar Conta Gratuita</button>
-		</form>
-	</section>
-
-		<!-- ===== RÁPIDO E SEGURO ===== -->
-	<section id="rapido-seguro" class="section" style="padding: 80px 2rem; max-width: 1200px; margin: 0 auto;">
-		<h2 style="text-align: center; margin-bottom: 1rem; font-size: 2.5rem; color: #1a1a1a;">Rápido e Seguro</h2>
-		<p style="text-align: center; max-width: 600px; margin: 0 auto 3rem; font-size: 1.1rem; color: #666;">Encontra o artista certo em poucos minutos, com um processo simples, transparente e pensado tanto para clientes como para músicos.</p>
-		
-		<ul style="list-style: none; max-width: 900px; margin: 0 auto; display: grid; gap: 20px;">
-			<li style="padding: 20px; background: #f5f5f5; border-radius: 8px;">
-				<strong style="color: #D946EF;">Resposta rápida</strong>: faz o pedido de orçamento e recebe propostas dos artistas disponíveis em pouco tempo.
-			</li>
-			<li style="padding: 20px; background: #f5f5f5; border-radius: 8px;">
-				<strong style="color: #D946EF;">Processo simples</strong>: escolhe o tipo de evento, data, cidade e estilo musical, e nós tratamos da filtragem dos artistas.
-			</li>
-			<li style="padding: 20px; background: #f5f5f5; border-radius: 8px;">
-				<strong style="color: #D946EF;">Perfil verificado</strong>: trabalhamos com artistas avaliados, com portfólio real e experiência em eventos.
-			</li>
-			<li style="padding: 20px; background: #f5f5f5; border-radius: 8px;">
-				<strong style="color: #D946EF;">Comunicação organizada</strong>: concentra toda a conversa sobre o evento num só lugar, sem perder mensagens.
-			</li>
-			<li style="padding: 20px; background: #f5f5f5; border-radius: 8px;">
-				<strong style="color: #D946EF;">Transparência</strong>: combina cachet, horários e necessidades técnicas de forma clara antes de confirmar o evento.
-			</li>
-		</ul>
-	</section>
-	
-	<section id="rapido-seguro" style="padding:80px 2rem;max-width:1200px;margin:0 auto"><h2 style="text-align:center;margin-bottom:1rem;font-size:2.5rem">Rápido e Seguro</h2><p style="text-align:center;max-width:600px;margin:0 auto 3rem;color:#666">Encontra o artista certo em poucos minutos, com um processo simples, transparente e pensado tanto para clientes como para músicos.</p><ul style="list-style:none;max-width:900px;margin:0 auto;display:grid;gap:20px"><li style="padding:20px;background:#f5f5f5;border-radius:8px"><strong style="color:#D946EF">Resposta rápida</strong>: faz o pedido de orçamento e recebe propostas dos artistas disponíveis em pouco tempo.</li><li style="padding:20px;background:#f5f5f5;border-radius:8px"><strong style="color:#D946EF">Processo simples</strong>: escolhe o tipo de evento, data, cidade e estilo musical, e nós tratamos da filtragem dos artistas.</li><li style="padding:20px;background:#f5f5f5;border-radius:8px"><strong style="color:#D946EF">Perfil verificado</strong>: trabalhamos com artistas avaliados, com portfólio real e experiência em eventos.</li><li style="padding:20px;background:#f5f5f5;border-radius:8px"><strong style="color:#D946EF">Comunicação organizada</strong>: concentra toda a conversa sobre o evento num só lugar, sem perder mensagens.</li><li style="padding:20px;background:#f5f5f5;border-radius:8px"><strong style="color:#D946EF">Transparência</strong>: combina cachet, horários e necessidades técnicas de forma clara antes de confirmar o evento.</li></ul></section>
-	
-550
-	
+</body>
+</html>
