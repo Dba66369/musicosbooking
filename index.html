@@ -359,6 +359,11 @@
             .btn { width: 100%; }
             .how-it-works h2 { font-size: 1.8rem; }
         }
+
+		        /* Hidden sections - only show when clicked */
+        .hidden-section {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
@@ -631,7 +636,7 @@
 </script>
 
     <!-- ===== SECÇÃO: QUEM SOMOS ===== -->
-	<section id="quem-somos" class="section">
+	<section id="quem-somos" class="section hidden-section">
     <div class="container">
         <h2>Quem Somos</h2>
         <p>A <strong>MúsicosBooKing</strong> nasceu de uma paixão genuína pela música e de mais de 20 anos de experiência no ramo. O criador da plataforma, um músico profissional com uma trajetória extensa no mundo dos eventos e performances, vivenciou na prática a importância crítica de conectar os músicos certos com os repertórios certos aos eventos certos.</p>
@@ -664,7 +669,7 @@
 </section>
 
 <!-- ===== SECÇÃO: FAQ ===== -->
-<section id="faq" style="padding: 60px 2rem; background: #fafafa; max-width: 1200px; margin: 0 auto;">
+<section id="faq class="hidden-section"" style="padding: 60px 2rem; background: #fafafa; max-width: 1200px; margin: 0 auto;">
   <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 50px; color: #1a1a1a;">Perguntas Frequentes</h2>
   <div style="display: grid; gap: 20px;">
     <div style="background: white; padding: 20px; border-left: 4px solid #9333ea; border-radius: 8px;">
@@ -700,7 +705,7 @@
 </section>
 
 <!-- ===== SECÇÃO: STATUS/BLOG ===== -->
-<section id="status" style="padding: 60px 2rem; background: white; max-width: 1200px; margin: 60px auto;">
+<section id="status" class="hidden-section" style="padding: 60px 2rem; background: white; max-width: 1200px; margin: 60px auto;">
   <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 50px; color: #1a1a1a;">Últimas Notícias</h2>
   <div style="display: grid; gap: 30px;">
     <div style="background: #f0f4ff; padding: 25px; border-radius: 12px; border-left: 4px solid #9333ea;">
@@ -765,12 +770,12 @@
 
 <!-- ===== HIDDEN SECTIONS: TERMOS, PRIVACIDADE, ETC ===== -->
 <!-- Estas secções podem ser expandidas em páginas futuras -->
-<div id="termos" style="padding: 60px 2rem; max-width: 1200px; margin: 0 auto;">
+<div id="termos"  class="hidden-section"style="padding: 60px 2rem; max-width: 1200px; margin: 0 auto;">
   <h2>Termos e Condições</h2>
   <h2>Termos e Condições</h2><h3>1. Aceitação dos Termos</h3><p>Ao aceder e utilizar a plataforma MusicosBooking (doravante "Plataforma"), você concorda em cumprir estes Termos e Condições. Se não concordar com alguma parte, por favor, não utilize a Plataforma.</p><h3>2. Definições</h3><p><strong>Empresa/Organizador:</strong> Pessoa ou entidade que procura serviços de músicos para eventos.<br><strong>Músico/Artista:</strong> Profissional que oferece serviços musicais na Plataforma.<br><strong>Evento:</strong> Ocasião para qual a Empresa solicita serviços de músicos.</p><h3>3. Cadastro e Responsabilidades</h3><p>Os utilizadores são responsáveis pela exatidão das informações fornecidas durante o cadastro. Cada utilizador concorda em manter a confidenicialidade das suas credenciais de acesso. A MusicosBooking não se responsabiliza pelo acesso não autorizado à sua conta.</p><h3>4. Política de Cancelamento</h3><p>Cancelamentos devem ser comunicados com no mínimo 48 horas de antecedência do evento. Cancelamentos com menos de 48 horas poderão estar sujeitos a taxas conforme acordado previamente. A MusicosBooking não responsabiliza-se por perdas decorrentes de cancelamentos.</p><h3>5. Pagamentos</h3><p>O pagamento é acordado diretamente entre a Empresa e o Músico. A MusicosBooking não gerencia transferencias diárias de dinheiro. Recomenda-se o uso de transferência bancária ou outras formas seguras de pagamento. Ambas as partes são responsáveis pelo cumprimento dos seus obrigações de pagamento.</p><h3>6. Limitação de Responsabilidade</h3><p>A Plataforma é fornecida "como está", sem garantias de qualquer tipo. A MusicosBooking não é responsável por danos diretos, indiretos, incidentais ou consequentes decorrentes do uso da Plataforma.</p><h3>7. Lei Aplicável</h3><p>Estes Termos são regidos pela lei de Portugal. Qualquer controvérsia será resolvida nos tribunais competentes de Porto.</p><p style="margin-top: 2rem; font-style: italic; color: #666;"><strong>Versão 1.0 - Janeiro 2026</strong></p></div>
 </div>
 
-<div id="privacidade" style="padding: 60px 2rem; max-width: 1200px; margin: 0 auto;">
+<div id="privacidade"  class="hidden-section"style="padding: 60px 2rem; max-width: 1200px; margin: 0 auto;">
   <h2>Política de Privacidade</h2>
   <p>Política de privacidade c<h2>Política de Privacidade</h2><h3>1. Introdução</h3><p>A MusicosBooking respeita a sua privacidade e está comprometida em proteger os seus dados pessoais. Esta Política de Privacidade descreve como recolhemos, utilizamos e protegemos as suas informações.</p><h3>2. Informações que Recolhemos</h3><p>Durante o cadastro e utilização da Plataforma, podemos recolher:<br>- Nome completo<br>- Endereço de email<br>- Número de telefone<br>- Informações profissionais (para músicos)<br>- Detalhes de eventos (para empresas)<br>- Informações de pagamento (processadas de forma segura)</p><h3>3. Como Utilizamos os Seus Dados</h3><p>Utilizamos os seus dados pessoais para:<br>- Facilitar a comunicação entre empresas e músicos<br>- Processar solicitações de eventos<br>- Enviar notificações e atualizações<br>- Melhorar a qualidade do serviço<br>- Cumprir obrigações legais</p><h3>4. Proteção de Dados</h3><p>Implementamos medidas de segurança apropriadas para proteger os seus dados pessoais contra acesso não autorizado, alteração ou divulgação. No entanto, nenhum método de transmissão pela internet é 100% seguro.</p><h3>5. Partilha de Dados</h3><p>Apenas partilhamos os seus dados com terceiros quando necessário para fornecer o serviço (ex: processadores de pagamento). Não vendemos ou alugamos os seus dados pessoais a terceiros.</p><h3>6. Direitos do Utilizador</h3><p>Você tem direito a:<br>- Aceder aos seus dados pessoais<br>- Solicitar a correção de dados inexatos<br>- Solicitar a eliminção dos seus dados<br>- Objecção ao processamento dos seus dados</p><h3>7. Retenção de Dados</h3><p>Mantemos os seus dados pessoais enquanto a sua conta estiver ativa. Após a eliminação da conta, os seus dados serão removidos dentro de 30 dias, salvo se a lei exigir a sua retenção.</p><h3>8. Contacto</h3><p>Para questões sobre a nossa Política de Privacidade, por favor contacte-nos em: <strong>info@musicosbooking.pt</strong></p><p style="margin-top: 2rem; font-style: italic; color: #666;"><strong>Versão 1.0 - Janeiro 2026</strong></p></div>
 </div>
