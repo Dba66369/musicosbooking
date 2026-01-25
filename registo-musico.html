@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registo de Músico | MúsicosBooking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --accent: #FFD700;
+            --bg: #F8F9FA;
+            --text: #333333;
+            --white: #FFFFFF;
+            --success: #0984e3;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); padding-bottom: 50px; }
+        header { background: var(--primary); color: white; padding: 20px 5%; text-align: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; font-family: 'Playfair Display'; color: var(--accent); cursor: pointer; }
+        .container { max-width: 900px; margin: 40px auto; background: var(--white); padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        h1 { font-family: 'Playfair Display', serif; margin-bottom: 25px; text-align: center; color: var(--primary); }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group.full { grid-column: span 2; }
+        label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.85rem; }
+        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #DDD; border-radius: 8px; font-family: inherit; }
+        .btn-submit { background: var(--success); color: white; width: 100%; padding: 15px; border: none; border-radius: 30px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: 0.3s; margin-top: 20px; }
+        .btn-submit:hover { background: #0773c5; transform: translateY(-2px); }
+        @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } .form-group.full { grid-column: span 1; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo" onclick="window.location.href='index.html'">MúsicosBooking</div>
+    </header>
+    <div class="container">
+        <h1>Torne-se um Músico Profissional</h1>
+        <form id="musicoForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Nome Artístico</label>
+                    <input type="text" id="nomeArtistico" placeholder="Ex: Banda X" required>
+                </div>
+                <div class="form-group">
+                    <label>Nome Completo</label>
+                    <input type="text" id="nomeCompleto" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirmar Email</label>
+                    <input type="email" id="confirmEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Telemóvel</label>
+                    <input type="tel" id="telefone" required>
+                </div>
+                <div class="form-group">
+                    <label>Preço Médio por Hora (€)</label>
+                    <input type="number" id="preco" required>
+                </div>
+                <div class="form-group">
+                    <label>Anos de Experiência</label>
+                    <input type="number" id="experiencia" required>
+                </div>
+                <div class="form-group">
+                    <label>Cidade Principal</label>
+                    <select id="cidade" required>
+                        <option value="Porto">Porto</option>
+                        <option value="Lisboa">Lisboa</option>
+                        <option value="Braga">Braga</option>
+                        <option value="Faro">Faro</option>
+                    </select>
+                </div>
+                <div class="form-group full">
+                    <label>Instrumentos Principais</label>
+                    <select id="instrumentos" multiple required style="height: 100px;">
+                        <option value="Voz">Voz</option>
+                        <option value="Guitarra">Guitarra</option>
+                        <option value="Piano">Piano</option>
+                        <option value="Violino">Violino</option>
+                    </select>
+                </div>
+                <div class="form-group full">
+                    <label>Biografia Curta (100-500 caracteres)</label>
+                    <textarea id="bio" minlength="100" maxlength="500" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" id="senha" minlength="8" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirmar Senha</label>
+                    <input type="password" id="confirmSenha" minlength="8" required>
+                </div>
+            </div>
+            <button type="submit" class="btn-submit">Criar Perfil e Entrar</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('musicoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('✅ Perfil criado! Bem-vindo ao MúsicosBooking.');
+            window.location.href = 'dashboard-musico.html';
+        });
+    </script>
+</body>
+</html>
