@@ -19,7 +19,7 @@
         h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--primary); }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         header { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background: var(--primary); color: white; position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 1.5rem; font-weight: bold; font-family: 'Playfair Display'; color: var(--accent); }
+        .logo { font-size: 1.5rem; font-weight: bold; font-family: 'Playfair Display'; color: var(--accent); cursor: pointer; }
         nav ul { display: flex; list-style: none; gap: 25px; }
         .btn-auth { background: var(--accent); color: var(--primary); padding: 8px 20px; border-radius: 5px; font-weight: 600; }
         .hero { height: 80vh; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; padding: 0 20px; }
@@ -44,7 +44,7 @@
 </head>
 <body>
     <header>
-        <div class="logo">MúsicosBooking</div>
+        <div class="logo" onclick="window.location.href='index.html'">MúsicosBooking</div>
         <nav>
             <ul>
                 <li><a href="index.html">Início</a></li>
@@ -55,13 +55,11 @@
         </nav>
         <a href="cadastro-artista.html" class="btn-auth">Entrar / Registar</a>
     </header>
-
     <section class="hero">
         <h1>Excelência em música para seu momento.</h1>
         <p>A plataforma premium em Portugal para encontrar e contratar músicos de elite para eventos inesquecíveis.</p>
-        <a href="#explorar" class="btn-gold">Explorar Músicos</a>
+        <a href="#rapido-seguro" class="btn-gold">Explorar Músicos</a>
     </section>
-
     <section class="section" id="rapido-seguro" style="background: var(--muted);">
         <h2 class="section-title">Rápido e Seguro</h2>
         <div class="grid">
@@ -78,14 +76,18 @@
                 <p>Rigorosa seleção de talento. Apenas profissionais com experiência comprovada e avaliações reais fazem parte da nossa elite.</p>
             </div>
         </div>
+        <div style="margin-top: 40px;">
+            <a href="cadastro-artista.html" class="btn-gold">Começar como Artista</a>
+            <a href="registo-empresa.html" class="btn-auth" style="margin-left: 20px; padding: 15px 40px;">Contratar Músico</a>
+        </div>
     </section>
-
     <section class="section">
         <h2>Notícias e Tendências em Tempo Real</h2>
         <div class="news-tabs">
             <div class="tab-buttons">
                 <div class="tab-btn active" onclick="showTab('musicos-news')">Para Músicos</div>
                 <div class="tab-btn" onclick="showTab('empresas-news')">Para Empresas</div>
+                <div class="tab-btn" onclick="showTab('seguro-news')">Rápido e Seguro</div>
             </div>
             <div id="musicos-news" class="tab-content active">
                 <div class="grid">
@@ -111,9 +113,20 @@
                     </div>
                 </div>
             </div>
+            <div id="seguro-news" class="tab-content">
+                <div class="grid">
+                    <div class="card">
+                        <h4>Segurança em Cada Nota</h4>
+                        <p>Descubra como os nossos contratos digitais protegem tanto o artista como o cliente contra cancelamentos de última hora.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Pagamentos Simplificados</h4>
+                        <p>Processamento imediato e seguro. O valor fica retido e só é libertado após a confirmação da atuação do artista.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
-
     <div class="cta-box">
         <div>
             <h2>É um artista profissional?</h2>
@@ -121,10 +134,9 @@
         </div>
         <a href="cadastro-artista.html" class="btn-gold">Criar Perfil de Artista</a>
     </div>
-
     <footer>
         <div class="footer-col">
-            <div class="logo">MúsicosBooking</div>
+            <div class="logo" onclick="window.location.href='index.html'">MúsicosBooking</div>
             <p style="margin-top:15px; opacity:0.7;">Elevando a música em Portugal, um evento de cada vez.</p>
         </div>
         <div class="footer-col">
@@ -143,7 +155,6 @@
             </ul>
         </div>
     </footer>
-
     <script>
         function showTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
