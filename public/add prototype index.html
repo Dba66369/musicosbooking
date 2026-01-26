@@ -1,0 +1,1364 @@
+index.html
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <title>MúsicosBooking – Painel (Protótipo)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-card: #0b1020;
+      --accent: #eab308;
+      --accent-soft: rgba(234,179,8,0.1);
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --border: #1f2933;
+      --success: #22c55e;
+      --orange: #f97316;
+      --focus: rgba(250,204,21,0.85);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #111827, #020617 55%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    :where(button, a, input, select, textarea):focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 1200px;
+      background: rgba(15,23,42,0.9);
+      border-radius: 18px;
+      border: 1px solid rgba(148,163,184,0.22);
+      box-shadow: 0 20px 60px rgba(15,23,42,0.8);
+      display: flex;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 260px;
+      background: radial-gradient(circle at top, #111827, #020617);
+      border-right: 1px solid rgba(148,163,184,0.22);
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #facc15, #c2410c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #020617;
+      font-weight: 800;
+      font-size: 18px;
+      box-shadow: 0 0 30px rgba(250,204,21,0.7);
+      user-select: none;
+    }
+
+    .brand-text-title {
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .brand-text-sub {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .user-switch {
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(15,23,42,0.85);
+      border: 1px solid rgba(148,163,184,0.2);
+    }
+
+    .switch-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .switch-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .switch-btn {
+      font-size: 12px;
+      padding: 7px 6px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: rgba(15,23,42,0.9);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.18s ease;
+      text-align: center;
+    }
+
+    .switch-btn.active {
+      background: var(--accent-soft);
+      color: #fefce8;
+      border-color: rgba(250,204,21,0.6);
+      box-shadow: 0 0 0 1px rgba(250,204,21,0.4);
+    }
+
+    .menu-section-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 6px;
+      padding: 0 4px;
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .menu-item {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted);
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.18s ease;
+      background: transparent;
+      text-align: left;
+    }
+
+    .menu-item span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .menu-item .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--border);
+      flex: 0 0 auto;
+    }
+
+    .menu-item.active {
+      background: rgba(15,23,42,0.9);
+      color: #f9fafb;
+      border-color: rgba(148,163,184,0.6);
+      box-shadow: inset 0 0 0 1px rgba(15,23,42,0.9);
+    }
+
+    .menu-item.active .dot {
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(250,204,21,0.9);
+    }
+
+    .menu-badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(15,118,110,0.2);
+      color: #a5f3fc;
+      border: 1px solid rgba(45,212,191,0.4);
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(51,65,85,0.8);
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.3);
+      color: var(--muted);
+      width: fit-content;
+    }
+
+    .pill span.key {
+      background: rgba(15,23,42,1);
+      border-radius: 6px;
+      padding: 1px 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      color: #e5e7eb;
+    }
+
+    .main {
+      flex: 1;
+      padding: 24px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .top-title {
+      font-size: 18px;
+      font-weight: 600;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .top-sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .badge-role {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #fefce8;
+      border: 1px solid rgba(250,204,21,0.6);
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    .user-mini {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    .user-mini strong {
+      color: #e5e7eb;
+      font-size: 12px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .card-title {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .card-value {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .card-note {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .card-pill {
+      font-size: 11px;
+      align-self: flex-start;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.4);
+      color: var(--muted);
+    }
+
+    .layout-two {
+      display: grid;
+      grid-template-columns: 2fr 1.3fr;
+      gap: 16px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .panel {
+      background: var(--bg-card);
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 0;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .panel-title {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .panel-sub {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.4);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .btn-main {
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #eab308, #ca8a04);
+      color: #111827;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 8px 25px rgba(234,179,8,0.4);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-main:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 30px rgba(234,179,8,0.5);
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12px;
+    }
+
+    .list-item {
+      padding: 7px 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(30,41,59,0.9);
+      background: rgba(15,23,42,0.9);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .list-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .list-title {
+      font-weight: 500;
+    }
+
+    .list-meta {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .list-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+      font-size: 11px;
+      min-width: 160px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      margin-right: 4px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-size: 11px;
+      border: 1px solid rgba(148,163,184,0.4);
+      color: var(--muted);
+    }
+
+    .status-open {
+      border-color: rgba(234,179,8,0.6);
+      color: #facc15;
+    }
+
+    .status-open .status-dot {
+      background: #facc15;
+    }
+
+    .status-confirmed {
+      border-color: rgba(34,197,94,0.6);
+      color: #bbf7d0;
+    }
+
+    .status-confirmed .status-dot {
+      background: #22c55e;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 4px;
+      font-size: 12px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .field label {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      background: rgba(15,23,42,0.95);
+      border-radius: 9px;
+      border: 1px solid rgba(51,65,85,1);
+      padding: 6px 8px;
+      font-size: 12px;
+      color: #e5e7eb;
+      outline: none;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: rgba(250,204,21,0.8);
+      box-shadow: 0 0 0 1px rgba(250,204,21,0.35);
+    }
+
+    .field textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .hint {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .success-msg {
+      font-size: 11px;
+      color: #bbf7d0;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 960px) {
+      body {
+        padding: 10px;
+      }
+      .app {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+      .sidebar-footer {
+        width: 100%;
+      }
+      .main {
+        padding: 16px;
+      }
+      .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .layout-two {
+        grid-template-columns: 1fr;
+      }
+      .list-right {
+        min-width: 0;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="Barra lateral">
+      <div class="brand" aria-label="Marca">
+        <div class="brand-logo" aria-hidden="true">MB</div>
+        <div>
+          <div class="brand-text-title">MúsicosBooking</div>
+          <div class="brand-text-sub">Porto · Portugal</div>
+        </div>
+      </div>
+
+      <div class="user-switch" aria-label="Alternar tipo de utilizador">
+        <div class="switch-label">Ver painel como</div>
+        <div class="switch-buttons">
+          <button class="switch-btn active" data-role="empresa" type="button">Empresa</button>
+          <button class="switch-btn" data-role="musico" type="button">Músico</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="menu-section-title">Navegação</div>
+        <div class="menu" role="tablist" aria-label="Secções do painel">
+          <button class="menu-item active" data-section="dashboard" type="button">
+            <span><span class="dot"></span>Dashboard</span>
+            <span class="menu-badge">MVP</span>
+          </button>
+          <button class="menu-item" data-section="pedidos" type="button">
+            <span><span class="dot"></span>Pedidos</span>
+          </button>
+          <button class="menu-item" data-section="gigs" type="button">
+            <span><span class="dot"></span>Gigs</span>
+          </button>
+          <button class="menu-item" data-section="perfil" type="button">
+            <span><span class="dot"></span>Perfil</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div>Protótipo estático da área interna. Não há login real nem base de dados.</div>
+        <div class="pill">
+          <span>Para editar:</span>
+          <span class="key">index.html</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="top-bar">
+        <div class="top-title">
+          <div>
+            <span id="roleLabel">Painel da Empresa</span>
+            <span class="badge-role" id="roleBadge">Organizador</span>
+          </div>
+          <div class="top-sub" id="topSub">
+            Crie pedidos de músicos, receba propostas e acompanhe gigs confirmadas no Grande Porto.
+          </div>
+        </div>
+        <div class="user-mini">
+          <div><strong>Protótipo offline</strong></div>
+          <div>Sem login · Sem base de dados</div>
+        </div>
+      </div>
+
+      <div class="cards" id="summaryCards"></div>
+
+      <div class="layout-two">
+        <section class="panel" id="panel-left"></section>
+        <section class="panel" id="panel-right"></section>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const state = {
+      role: 'empresa',
+      section: 'dashboard',
+    };
+
+    const switchButtons = document.querySelectorAll('.switch-btn');
+    const menuItems = document.querySelectorAll('.menu-item');
+    const roleLabel = document.getElementById('roleLabel');
+    const roleBadge = document.getElementById('roleBadge');
+    const topSub = document.getElementById('topSub');
+    const summaryCards = document.getElementById('summaryCards');
+    const panelLeft = document.getElementById('panel-left');
+    const panelRight = document.getElementById('panel-right');
+
+    switchButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        switchButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.role = btn.dataset.role;
+        render();
+      });
+    });
+
+    menuItems.forEach(item => {
+      item.addEventListener('click', () => {
+        menuItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        state.section = item.dataset.section;
+        render();
+      });
+    });
+
+    function render() {
+      if (state.role === 'empresa') {
+        roleLabel.textContent = 'Painel da Empresa';
+        roleBadge.textContent = 'Organizador';
+        topSub.textContent =
+          'Crie pedidos de músicos, receba propostas e acompanhe gigs confirmadas no Grande Porto.';
+      } else {
+        roleLabel.textContent = 'Painel do Músico';
+        roleBadge.textContent = 'Artista';
+        topSub.textContent =
+          'Veja pedidos disponíveis, envie propostas profissionais e acompanhe gigs premium no Porto.';
+      }
+
+      renderSummaryCards();
+      renderPanels();
+    }
+
+    function renderSummaryCards() {
+      summaryCards.innerHTML = '';
+
+      if (state.role === 'empresa') {
+        summaryCards.innerHTML = `
+          <div class="card">
+            <div class="card-title">Pedidos em aberto</div>
+            <div class="card-value">3</div>
+            <div class="card-note">Pedidos à espera de propostas ou em análise.</div>
+          </div>
+          <div class="card">
+            <div class="card-title">Gigs confirmadas</div>
+            <div class="card-value">2</div>
+            <div class="card-pill">Próximos 30 dias</div>
+          </div>
+          <div class="card">
+            <div class="card-title">Músicos verificados</div>
+            <div class="card-value">18</div>
+            <div class="card-note">Curadoria ativa para o Grande Porto.</div>
+          </div>
+        `;
+      } else {
+        summaryCards.innerHTML = `
+          <div class="card">
+            <div class="card-title">Pedidos compatíveis</div>
+            <div class="card-value">5</div>
+            <div class="card-note">Eventos alinhados com o seu perfil e cachet.</div>
+          </div>
+          <div class="card">
+            <div class="card-title">Gigs futuras</div>
+            <div class="card-value">3</div>
+            <div class="card-pill">Confirmadas</div>
+          </div>
+          <div class="card">
+            <div class="card-title">Avaliação média</div>
+            <div class="card-value">4.9 ★</div>
+            <div class="card-note">Baseado em feedback de clientes.</div>
+          </div>
+        `;
+      }
+    }
+
+    function renderPanels() {
+      if (state.section === 'dashboard') {
+        renderDashboard();
+      } else if (state.section === 'pedidos') {
+        renderPedidos();
+      } else if (state.section === 'gigs') {
+        renderGigs();
+      } else if (state.section === 'perfil') {
+        renderPerfil();
+      }
+    }
+
+    function renderDashboard() {
+      if (state.role === 'empresa') {
+        panelLeft.innerHTML = `
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Atividade recente</div>
+              <div class="panel-sub">Resumo dos últimos pedidos e propostas recebidas.</div>
+            </div>
+            <button class="btn-main" id="btnNovoPedido">Criar novo pedido</button>
+          </div>
+          <div class="list">
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Quarteto de cordas para hotel boutique</div>
+                <div class="list-meta">Sábado · 20:00 · Baixa do Porto · Orçamento: €400–€600</div>
+              </div>
+              <div class="list-right">
+                <div class="status-pill status-open">
+                  <span class="status-dot"></span>
+                  Aberto · 2 propostas
+                </div>
+                <div>Última proposta há 3h</div>
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Jazz trio para evento corporativo</div>
+                <div class="list-meta">15 de Março · 19:30 · Boavista · Orçamento: €700–€900</div>
+              </div>
+              <div class="list-right">
+                <div class="status-pill status-confirmed">
+                  <span class="status-dot"></span>
+                  Confirmado · Cachet €820
+                </div>
+                <div>Músico: Porto Jazz Trio</div>
+              </div>
+            </div>
+          </div>
+        `;
+        panelRight.innerHTML = `
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Próximas gigs confirmadas</div>
+              <div class="panel-sub">Eventos já fechados com artista e condições definidas.</div>
+            </div>
+            <span class="tag">Visão geral</span>
+          </div>
+          <div class="list">
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Piano solo · Hotel 5★</div>
+                <div class="list-meta">Quinta · 18:30 · Foz · Artista: João Silva</div>
+              </div>
+              <div class="list-right">
+                <div class="status-pill status-confirmed">
+                  <span class="status-dot"></span>
+                  Pagamento confirmado
+                </div>
+                <div>Contrato digital assinado</div>
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Trio acústico · Restaurante fine dining</div>
+                <div class="list-meta">Próxima semana · 21:00 · Aliados</div>
+              </div>
+              <div class="list-right">
+                <div class="status-pill">
+                  <span class="status-dot" style="background:#f97316;"></span>
+                  Aguardando pagamento
+                </div>
+                <div>Proposta aceite · contrato enviado</div>
+              </div>
+            </div>
+          </div>
+        `;
+        const btn = panelLeft.querySelector('#btnNovoPedido');
+        if (btn) {
+          btn.addEventListener('click', () => {
+            state.section = 'pedidos';
+            menuItems.forEach(i =>
+              i.classList.toggle('active', i.dataset.section === 'pedidos'),
+            );
+            render();
+          });
+        }
+      } else {
+        panelLeft.innerHTML = `
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Pedidos compatíveis consigo</div>
+              <div class="panel-sub">Eventos alinhados ao seu estilo e cachet.</div>
+            </div>
+            <span class="tag">Curadoria ativa</span>
+          </div>
+          <div class="list">
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Violino solo · Jantar corporativo</div>
+                <div class="list-meta">Sexta · 20:00 · Centro histórico · Orçamento: €250–€350</div>
+              </div>
+              <div class="list-right">
+                <button class="btn-main" type="button">Enviar proposta</button>
+                <div class="hint">Cliente procura repertório clássico/ambiental.</div>
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Duo voz + violino · Casamento íntimo</div>
+                <div class="list-meta">Abril · 16:00 · Vila Nova de Gaia · Orçamento: €600–€800</div>
+              </div>
+              <div class="list-right">
+                <button class="btn-main" type="button">Enviar proposta</button>
+                <div class="hint">Cerimónia + cocktail · som incluído.</div>
+              </div>
+            </div>
+          </div>
+        `;
+        panelRight.innerHTML = `
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Próximas gigs confirmadas</div>
+              <div class="panel-sub">Detalhes das atuações futuras já fechadas.</div>
+            </div>
+            <span class="tag">Agenda</span>
+          </div>
+          <div class="list">
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Hotel · Lobby music</div>
+                <div class="list-meta">Quarta · 18:00–20:00 · Foz do Douro</div>
+              </div>
+              <div class="list-right">
+                <div class="status-pill status-confirmed">
+                  <span class="status-dot"></span>
+                  Confirmado · €220
+                </div>
+                <div>Repertório: jazz leve / ambient</div>
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Restaurante · Jantar degustação</div>
+                <div class="list-meta">Domingo · 19:30–22:00 · Baixa</div>
+              </div>
+              <div class="list-right">
+                <div class="status-pill">
+                  <span class="status-dot" style="background:#f97316;"></span>
+                  Aguardando contrato
+                </div>
+                <div>Cliente revendo cláusulas de horário.</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function renderPedidos() {
+      if (state.role === 'empresa') {
+        panelLeft.innerHTML = `
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Criar novo pedido de músicos</div>
+              <div class="panel-sub">Descreva o evento e receba propostas em poucas horas.</div>
+            </div>
+            <span class="tag">Briefing do evento</span>
+          </div>
+          <form class="form" id="formNovoPedido">
+            <div class="form-row">
+              <div class="field">
+                <label>Nome do evento</label>
+                <input type="text" placeholder="Jantar corporativo · Hotel cinco estrelas" required />
+              </div>
+              <div class="field">
+                <label>Tipo de evento</label>
+                <select required>
+                  <option value="">Selecione...</option>
+                  <option>Hotel / Lobby</option>
+                  <option>Restaurante</option>
+                  <option>Evento corporativo</option>
+                  <option>Casamento</option>
+                  <option>Outro</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label>Data</label>
+                <input type="date" required />
+              </div>
+              <div class="field">
+                <label>Horário (início e fim)</label>
+                <input type="text" placeholder="19:30 – 22:30" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label>Local (morada / zona)</label>
+                <input type="text" placeholder="Baixa do Porto · Rua..." required />
+              </div>
+              <div class="field">
+                <label>Estilo musical desejado</label>
+                <select required>
+                  <option value="">Selecione...</option>
+                  <option>Clássico / Ambiente</option>
+                  <option>Jazz / Lounge</option>
+                  <option>Pop internacional</option>
+                  <option>Misto (ambiente + festa)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label>Orçamento mínimo (€)</label>
+                <input type="number" min="0" placeholder="300" />
+              </div>
+              <div class="field">
+                <label>Orçamento máximo (€)</label>
+                <input type="number" min="0" placeholder="600" />
+              </div>
+            </div>
+            <div class="field">
+              <label>Detalhes importantes</label>
+              <textarea placeholder="Dress code, restrições de volume, requisitos de repertório, etc."></textarea>
+            </div>
+            <button type="submit" class="btn-main">Guardar pedido (protótipo)</button>
+            <div class="hint">Este protótipo não envia dados para servidor. Serve para alinhar fluxo e layout.</div>
+            <div class="success-msg" id="pedidoSucesso" style="display:none;">
+              Pedido registado no protótipo. No sistema real, este evento ficaria visível para músicos compatíveis.
+            </div>
+          </form>
+        `;
+        panelRight.innerHTML = `
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Pedidos recentes</div>
+              <div class="panel-sub">Simulação de pedidos que já teria criado.</div>
+            </div>
+            <span class="tag">Histórico</span>
+          </div>
+          <div class="list">
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Jazz trio · Evento corporativo</div>
+                <div class="list-meta">15/03 · Boavista · Orçamento €700–€900</div>
+              </div>
+              <div class="list-right">
+                <div class="status-pill status-open">
+                  <span class="status-dot"></span>
+                  Recebendo propostas
+                </div>
+                <div>3 propostas recebidas</div>
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Piano solo · Hotel 5★</div>
+                <div class="list-meta">Confirmado · Foz do Douro</div>
+              </div>
+              <div class="list-right">
+                <div class="status-pill status-confirmed">
+                  <span class="status-dot"></span>
+                  Confirmado
+                </div>
+                <div>Contrato assinado</div>
+              </div>
+            </div>
+          </div>
+        `;
+        const form = document.getElementById('formNovoPedido');
+        const msg = document.getElementById('pedidoSucesso');
+        if (form && msg) {
+          form.addEventListener('submit', e => {
+            e.preventDefault();
+            msg.style.display = 'block';
+          });
+        }
+      } else {
+        panelLeft.innerHTML = `
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Pedidos disponíveis</div>
+              <div class="panel-sub">Selecione um pedido e envie a sua proposta.</div>
+            </div>
+            <span class="tag">Matching (simulado)</span>
+          </div>
+          <div class="list">
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Violino solo · Hotel boutique</div>
+                <div class="list-meta">Sábado · 20:00 · Centro do Porto · Orçamento €250–€350</div>
+              </div>
+              <div class="list-right">
+                <button class="btn-main" type="button">Enviar proposta</button>
+                <div class="hint">Ambiente sofisticado, repertório clássico/ambiental.</div>
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Música ambiente · Restaurante fine dining</div>
+                <div class="list-meta">Quinta · 19:30–22:00 · Foz</div>
+              </div>
+              <div class="list-right">
+                <button class="btn-main" type="button">Enviar proposta</button>
+                <div class="hint">Volume baixo, repertório instrumental.</div>
+              </div>
+            </div>
+          </div>
+        `;
+        panelRight.innerHTML = `
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Propostas enviadas (simulação)</div>
+              <div class="panel-sub">Exemplo de estados das suas propostas.</div>
+            </div>
+            <span class="tag">Estado</span>
+          </div>
+          <div class="list">
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Jazz trio · Evento corporativo</div>
+                <div class="list-meta">Proposta: €850 · Aguardando resposta</div>
+              </div>
+              <div class="list-right">
+                <div class="status-pill status-open">
+                  <span class="status-dot"></span>
+                  Aguardando cliente
+                </div>
+                <div>Enviado há 2 dias</div>
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Cocktail · Rooftop hotel</div>
+                <div class="list-meta">Proposta aceite · Data: 05/04</div>
+              </div>
+              <div class="list-right">
+                <div class="status-pill status-confirmed">
+                  <span class="status-dot"></span>
+                  Confirmado
+                </div>
+                <div>Contrato em fase de assinatura</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function renderGigs() {
+      if (state.role === 'empresa') {
+        panelLeft.innerHTML = `
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Gigs futuras</div>
+              <div class="panel-sub">Eventos confirmados com músicos selecionados.</div>
+            </div>
+            <span class="tag">Visão calendário (futuro)</span>
+          </div>
+          <div class="list">
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Lobby music · Hotel Vista Douro</div>
+                <div class="list-meta">Quarta · 18:00–20:00 · Artista: Trio Instrumental Porto</div>
+              </div>
+              <div class="list-right">
+                <div class="status-pill status-confirmed">
+                  <span class="status-dot"></span>
+                  Confirmado
+                </div>
+                <div>Pagamento concluído</div>
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Evento corporativo · Centro de Congressos</div>
+                <div class="list-meta">25/03 · 19:30–22:30 · Banda: Porto Groove</div>
+              </div>
+              <div class="list-right">
+                <div class="status-pill">
+                  <span class="status-dot" style="background:#f97316;"></span>
+                  Aguardando pagamento
+                </div>
+                <div>Contrato assinado</div>
+              </div>
+            </div>
+          </div>
+        `;
+        panelRight.innerHTML = `
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Gigs passadas</div>
+              <div class="panel-sub">Eventos já realizados, prontos para avaliação.</div>
+            </div>
+            <span class="tag">Feedback</span>
+          </div>
+          <div class="list">
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Jantar corporativo · Jazz duo</div>
+                <div class="list-meta">Realizado em 10/02 · Avaliação enviada</div>
+              </div>
+              <div class="list-right">
+                <div class="status-pill status-confirmed">
+                  <span class="status-dot"></span>
+                  5 ★
+                </div>
+                <div>Comentário: profissionalismo impecável.</div>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        panelLeft.innerHTML = `
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Próximas gigs</div>
+              <div class="panel-sub">Atuações já confirmadas com condições fechadas.</div>
+            </div>
+            <span class="tag">Agenda</span>
+          </div>
+          <div class="list">
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Hotel · Lobby music</div>
+                <div class="list-meta">Quarta · 18:00–20:00 · Foz do Douro · Cachet €220</div>
+              </div>
+              <div class="list-right">
+                <div class="status-pill status-confirmed">
+                  <span class="status-dot"></span>
+                  Confirmado
+                </div>
+                <div>Dress code: formal discreto.</div>
+              </div>
+            </div>
+          </div>
+        `;
+        panelRight.innerHTML = `
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Gigs passadas</div>
+              <div class="panel-sub">Atuações já realizadas com feedback disponível.</div>
+            </div>
+            <span class="tag">Histórico</span>
+          </div>
+          <div class="list">
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Restaurante · Jantar degustação</div>
+                <div class="list-meta">Realizado em 08/02 · Porto Baixa</div>
+              </div>
+              <div class="list-right">
+                <div class="status-pill status-confirmed">
+                  <span class="status-dot"></span>
+                  5 ★
+                </div>
+                <div>Comentário: “música perfeita, zero stress”.</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function renderPerfil() {
+      if (state.role === 'empresa') {
+        panelLeft.innerHTML = `
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Perfil da empresa</div>
+              <div class="panel-sub">Dados básicos para facilitar comunicação e faturação.</div>
+            </div>
+            <span class="tag">Organizador</span>
+          </div>
+          <form class="form">
+            <div class="field">
+              <label>Nome da empresa</label>
+              <input type="text" placeholder="Ex.: Hotel Vista Douro" />
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label>Nome de contacto</label>
+                <input type="text" placeholder="Responsável pelos eventos" />
+              </div>
+              <div class="field">
+                <label>Email</label>
+                <input type="email" placeholder="eventos@exemplo.pt" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label>Telefone</label>
+                <input type="tel" placeholder="+351 ..." />
+              </div>
+              <div class="field">
+                <label>Cidade</label>
+                <input type="text" placeholder="Porto" />
+              </div>
+            </div>
+            <div class="field">
+              <label>Notas internas</label>
+              <textarea placeholder="Ex.: preferimos músicos com experiência em hotelaria de luxo."></textarea>
+            </div>
+            <button type="button" class="btn-main">Guardar (protótipo)</button>
+            <div class="hint">No sistema real, estes dados iriam para a base de dados para uso em contratos e comunicações.</div>
+          </form>
+        `;
+        panelRight.innerHTML = `
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Política de qualidade</div>
+              <div class="panel-sub">Resumo do posicionamento da MúsicosBooking.</div>
+            </div>
+            <span class="tag">Curadoria</span>
+          </div>
+          <div class="list">
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Músicos verificados</div>
+                <div class="list-meta">Apenas artistas com experiência comprovada em palcos premium do Porto entram na plataforma.</div>
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Contrato e pagamento protegidos</div>
+                <div class="list-meta">Objetivo: segurança jurídica e operacional para ambos os lados.</div>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        panelLeft.innerHTML = `
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Perfil do músico</div>
+              <div class="panel-sub">Apresente-se de forma profissional para gigs premium.</div>
+            </div>
+            <span class="tag">Artista</span>
+          </div>
+          <form class="form">
+            <div class="form-row">
+              <div class="field">
+                <label>Nome artístico</label>
+                <input type="text" placeholder="Ex.: Bruno – Violino Porto" />
+              </div>
+              <div class="field">
+                <label>Instrumento / formação</label>
+                <input type="text" placeholder="Violino solo, quarteto de cordas, etc." />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label>Cidade base</label>
+                <input type="text" placeholder="Porto" />
+              </div>
+              <div class="field">
+                <label>Raio de deslocação (km)</label>
+                <input type="number" placeholder="50" />
+              </div>
+            </div>
+            <div class="field">
+              <label>Bio curta</label>
+              <textarea placeholder="3–4 linhas sobre experiência em palcos, estilos que domina e tipo de eventos em que é especialista."></textarea>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label>Faixa de cachet habitual (€)</label>
+                <input type="text" placeholder="Ex.: €200–€400 por gig" />
+              </div>
+              <div class="field">
+                <label>Links (YouTube / Instagram)</label>
+                <input type="text" placeholder="https://..." />
+              </div>
+            </div>
+            <div class="field">
+              <label>Disponibilidade / Notas</label>
+              <textarea placeholder="Ex.: disponível sobretudo sextas e sábados; não aceita eventos ao ar livre sem cobertura."></textarea>
+            </div>
+            <button type="button" class="btn-main">Guardar (protótipo)</button>
+            <div class="hint">No sistema real, este perfil seria usado pela curadoria e pelos clientes na escolha.</div>
+          </form>
+        `;
+        panelRight.innerHTML = `
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Dicas de posicionamento</div>
+              <div class="panel-sub">Sugestões para aumentar a taxa de gigs premium.</div>
+            </div>
+            <span class="tag">Mindset de palco</span>
+          </div>
+          <div class="list">
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Portefólio visual forte</div>
+                <div class="list-meta">Vídeos de boa qualidade em ambientes reais (hotel, restaurante, corporate) geram mais confiança.</div>
+              </div>
+            </div>
+            <div class="list-item">
+              <div class="list-left">
+                <div class="list-title">Comunicação profissional</div>
+                <div class="list-meta">Respostas rápidas, linguagem clara e foco na solução fazem você parecer parte da equipa do cliente.</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    render();
+  </script>
+</body>
+</html>
+
+
